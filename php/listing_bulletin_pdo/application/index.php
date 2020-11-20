@@ -19,17 +19,17 @@ $moyenne_classe = $eleve_model->calc_classe_sum();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet/less" type="text/css" href="../css/styles.less" />
-    <script src="../librairie/less.js"></script>
-    <script src="../librairie/jquery-3.5.1.min.js"></script>
-    <script src="../librairie/jquery.validate.min.js" ></script>
-    <script src="../js/jq_validation.js" async></script>
+    <link rel="stylesheet/less" type="text/css" href="css/styles.less" />
+    <script src="librairie/less.js"></script>
+    <script src="librairie/jquery-3.5.1.min.js"></script>
+    <script src="librairie/jquery.validate.min.js" ></script>
+    <script src="js/jq_validation.js" async></script>
 </head>
 <body>
     <div>
         <a href="eleve/create_eleve.php">Ajouter un élève</a>
 
-        <table>
+        <table class='table'>
             <thead>
                 <tr>
                     <th>Prénom</th>
@@ -37,11 +37,11 @@ $moyenne_classe = $eleve_model->calc_classe_sum();
                     <th>Date de naissance</th>
                     <th>Moyenne</th>
                     <th>Appréciation</th>
-                    <th>Modifier</th>
+                    <th>Afficher et Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class='tbody'>
                 <?php for($i=0; $i<count($all_eleves); $i++) : ?>
                     <?php //pre_var_dump($all_eleves[$i], null); ?>
                     <tr>

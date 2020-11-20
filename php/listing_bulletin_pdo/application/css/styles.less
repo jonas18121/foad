@@ -1,4 +1,4 @@
-
+// div container
 div#container{
     width: 50%;
     margin: auto;
@@ -20,12 +20,41 @@ div#container{
 // Message error
 div#error{
     background-color: red;
+    text-align: center;
     
     span{
         color: white;
-        margin: 30px 0;
+        font-size: 20px;
     }
 }
 label.error{
     color: red;
+}
+
+
+// table
+.table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+    tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color:#ddd;
+    }
 }

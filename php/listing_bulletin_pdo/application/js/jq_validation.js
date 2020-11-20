@@ -19,7 +19,7 @@ $(function(){
 
             if (errors) {
                 
-                let message = (errors == 1) ? 'Vous avez ' + errors + ' erreur à corriger' : 'Vous avez ' + errors + ' erreurs à corriger';
+                let message = (errors == 1) ? ' Vous avez ' + errors + ' erreur à corriger' : ' Vous avez ' + errors + ' erreurs à corriger';
                 $('div#error span').html(message); 
                 $('div#error').show();
             }
