@@ -36,25 +36,44 @@ if ($_POST) {
 
 
 ?>
-<h1>Ajouter un élève</h1>
-<form action="" method="post">
-    <div>
-        <input type="text" name="nom" placeholder="Nom de l'élève">
-    </div>
-    <div>
-        <input type="text" name="prenom" placeholder="Prénom de l'élève">
-    </div>
-    <div>
-        <input type="date" name="date_naissance" placeholder="Date de naissance de l'élève">
-    </div>
-    <div>
-        <input type="text" name="moyenne" placeholder="Moyenne de l'élève">
-    </div>
-    <div>
-        <textarea name="appreciation" id="" cols="30" rows="10" placeholder=" Commentaire sur l'élève"></textarea>
-    </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet/less" type="text/css" href="../css/styles.less" />
+    <script src="../librairie/less.js"></script>
+    <script src="../librairie/jquery-3.5.1.min.js"></script>
+    <script src="../librairie/jquery.validate.min.js" ></script>
+    <script src="../js/jq_validation.js" async></script>
+</head>
+<body>
+    <div id="container">
+        <h1>Ajouter un élève</h1>
 
-    <div>
-        <input type="submit" value="Envoyer">
+        <div id="error"><span></span></div>
+
+        <form action="" method="post" id="form_add_eleve">
+            <div>
+                <input type="text" name="nom" id="nom" placeholder="Nom de l'élève" required>
+            </div>
+            <div>
+                <input type="text" name="prenom" id="prenom" placeholder="Prénom de l'élève" required>
+            </div>
+            <div>
+                <input type="date" name="date_naissance" id="date_naissance" placeholder="Date de naissance de l'élève" required>
+            </div>
+            <div>
+                <input type="text" name="moyenne" id="moyenne" placeholder="Moyenne de l'élève" required>
+            </div>
+            <div>
+                <textarea name="appreciation" id="appreciation" cols="30" rows="10" placeholder=" Commentaire sur l'élève" required></textarea>
+            </div>
+
+            <div>
+                <input type="submit" value="Envoyer">
+            </div>
+        </form>
     </div>
-</form>
+</body>
+</html>
