@@ -1,13 +1,7 @@
 <?php
 
-class EleveModel
+class EleveModel extends Model
 {
-    public function __construct()
-    {
-        $this->bdd = new Database();
-        $this->bdd = $this->bdd->connect_bdd();
-    }
-
     /**
      * select tous les eleves
      */
@@ -21,33 +15,6 @@ class EleveModel
         return $all_eleves;
     }
     
-    
-    /**
-     * compter le nombre d'eleve dans une classe
-     */
-    public function count_nb_eleve()
-    {
-        $sql = "SELECT COUNT(id) AS nb_eleve FROM eleve";
-        $count_eleve = $this->bdd->prepare($sql);
-        $count_eleve->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $count_eleve->execute();
-        $count_eleve = $count_eleve->fetch();
-        return $count_eleve;
-    }
-
-    /**
-     * calculer la moyenne de la classe
-     */
-    public function calc_classe_sum()
-    {
-        $sql = "SELECT ROUND(SUM(moyenne)/COUNT(id)) AS moyenne_classe FROM eleve";
-        $moyenne_classe = $this->bdd->query($sql);
-        $moyenne_classe->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $moyenne_classe->execute();
-        $moyenne_classe = $moyenne_classe->fetch();
-        return $moyenne_classe;
-    }
-
     /**
      * Ajouter un eleve
      */

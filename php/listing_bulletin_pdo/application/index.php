@@ -5,14 +5,18 @@ ini_set('display_errors', 1);
 
 require_once 'config/Database.php';
 require_once 'tools/tools.php';
-require_once 'Entity/Eleve.php';
+require_once 'Model/Model.php';
 require_once 'Model/EleveModel.php';
+require_once 'Model/ClasseModel.php';
+require_once 'Entity/Eleve.php';
+require_once 'Entity/Classe.php';
 
-$eleve_model = new EleveModel();
+$eleve_model  = new EleveModel();
+$classe_model = new ClasseModel();
 
 $all_eleves     = $eleve_model->get_all_eleve();
-$count_eleve    = $eleve_model->count_nb_eleve();
-$moyenne_classe = $eleve_model->calc_classe_sum();
+$count_eleve    = $classe_model->count_nb_eleve();
+$moyenne_classe = $classe_model->calc_classe_sum();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -66,8 +70,8 @@ $moyenne_classe = $eleve_model->calc_classe_sum();
                 <?php endfor ?>
             </tbody>
             <tfoot>
-                <td colspan="3">nombres d'élèves : <?= $count_eleve->{"nb_eleve"}  ?></td>
-                <td> <?= $moyenne_classe->{"moyenne_classe"} . ' / 20' ?></td>
+                <td colspan="3">nombres d'élèves : <?= $count_eleve->get_nb_eleve()  ?></td>
+                <td> <?= $moyenne_classe->get_moyenne_classe() . ' / 20' ?></td>
             </tfoot>
         </table>
     </div>

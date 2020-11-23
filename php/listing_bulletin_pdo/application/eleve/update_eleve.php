@@ -3,6 +3,7 @@
 require_once '../tools/tools.php';
 require_once '../config/Database.php';
 require_once '../Entity/Eleve.php';
+require_once '../Model/Model.php';
 require_once '../Model/EleveModel.php';
 
 $bdd = new Database();
