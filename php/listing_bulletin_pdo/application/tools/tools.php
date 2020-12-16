@@ -114,6 +114,24 @@ function connect_bdd(string $host, string $username, string $password, string $d
     return $link;
 }
 
+/**
+ * nettoyer les mots ou une phrase qui vient de l'extérieur pour aller dans la bdd
+ * exemple d'un formulaire
+ */
+function clean_word_entrant(string $words)
+{
+    return $words = addslashes(trim(strip_tags($words)));
+}
+
+/**
+ * nettoyer les mots ou phrase qui vient de la bdd pour être affiché sur le site
+ * 
+ */
+function clean_word_sortant(string $words)
+{
+    return $words = addslashes(trim(htmlentities($words)));
+}
+
 
 ////////////////////////// pagination //////////////////////////////////////////
 

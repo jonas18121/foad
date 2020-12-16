@@ -1,29 +1,7 @@
-<?php
-
-/* error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-require_once '../../../config/Database.php';
-require_once '../../../tools/tools.php';
-require_once '../../../Model/Model.php';
-require_once '../../../Model/EleveModel.php';
-require_once '../../../Model/ClasseModel.php';
-require_once '../../../Entity/Eleve.php';
-require_once '../../../Entity/Classe.php';
-
-$eleve_model  = new EleveModel();
-$classe_model = new ClasseModel();
-
-$all_eleves     = $eleve_model->get_all_eleve();
-$count_eleve    = $classe_model->count_nb_eleve();
-$moyenne_classe = $classe_model->calc_classe_sum(); */
-
-?>
-
 <?php ob_start() ?>
 
     <div>
-        <a href="create_eleve.php">Ajouter un élève</a>
+        <a href="index.php?controleur=eleve&action=controleur_create_eleve">Ajouter un élève</a>
 
         <table class='table'>
             <thead>
@@ -46,9 +24,9 @@ $moyenne_classe = $classe_model->calc_classe_sum(); */
                         <td><?= $all_eleves[$i]->getDate_naissance()->format('d/m/Y') ?></td>
                         <td><?= $all_eleves[$i]->getMoyenne() ?></td>
                         <td><?= $all_eleves[$i]->getAppreciation() ?></td>
-                        <td><a href="update_eleve.php?id_eleve=<?= $all_eleves[$i]->getId() ?>">Afficher et Modifier</a></td>
+                        <td><a href="index.php?controleur=eleve&action=controleur_update_eleve&id_eleve=<?= $all_eleves[$i]->getId() ?>">Afficher et Modifier</a></td>
                         <td>
-                            <form action="delete_eleve.php?" method="post">
+                            <form action="index.php?controleur=eleve&action=controleur_delete_eleve" method="post">
                                 <div>
                                     <input type="hidden" name="delete" value="<?= $all_eleves[$i]->getId() ?>">
                                 </div>

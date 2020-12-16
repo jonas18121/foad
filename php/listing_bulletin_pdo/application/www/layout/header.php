@@ -10,3 +10,10 @@
     <script src="www/js/jq_validation.js" async></script>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.php?controleur=eleve&action=controleur_get_all_eleve"> Accueil</a></li>
+            </ul>
+        </nav>
+    </header>
