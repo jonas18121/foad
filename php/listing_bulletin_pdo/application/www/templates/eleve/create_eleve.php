@@ -1,9 +1,9 @@
 <?php
 
-require_once '../tools/tools.php';
-require_once '../config/Database.php';
-require_once '../Model/Model.php';
-require_once '../Model/EleveModel.php';
+require_once '../../../tools/tools.php';
+require_once '../../../config/Database.php';
+require_once '../../../Model/Model.php';
+require_once '../../../Model/EleveModel.php';
 
 $bdd = new Database();
 $bdd = $bdd->connect_bdd();
@@ -27,7 +27,7 @@ if ($_POST) {
 
                         $eleve_model->add_eleve($id, $nom, $prenom, $date_naissance, $moyenne, $appreciation);
 
-                        header_location('../index.php');
+                        header_location('../../../index.php');
                     }
                 }
             }
@@ -42,11 +42,11 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet/less" type="text/css" href="../css/styles.less" />
-    <script src="../librairie/less.js"></script>
-    <script src="../librairie/jquery-3.5.1.min.js"></script>
-    <script src="../librairie/jquery.validate.min.js" ></script>
-    <script src="../js/jq_validation.js" async></script>
+    <link rel="stylesheet/less" type="text/css" href="../../css/styles.less" />
+    <script src="../../../librairie/less.js"></script>
+    <script src="../../../librairie/jquery-3.5.1.min.js"></script>
+    <script src="../../../librairie/jquery.validate.min.js" ></script>
+    <script src="../../js/jq_validation.js" async></script>
 </head>
 <body>
     <div id="container">

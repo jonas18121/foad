@@ -1,9 +1,9 @@
 <?php
 
-require_once '../tools/tools.php';
-require_once '../config/Database.php';
-require_once '../Model/Model.php';
-require_once '../Model/EleveModel.php';
+require_once '../../../tools/tools.php';
+require_once '../../../config/Database.php';
+require_once '../../../Model/Model.php';
+require_once '../../../Model/EleveModel.php';
 
 $bdd = new Database();
 $bdd = $bdd->connect_bdd(); 
@@ -17,7 +17,7 @@ if ($_POST) {
 
         $eleve_model->delete_eleve($id);
 
-        header_location('../index.php');
+        header_location('../../../index.php');
 
     }else{
         // $erreur[] = 'erreur lors de la suppréssion';

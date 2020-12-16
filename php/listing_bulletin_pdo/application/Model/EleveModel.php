@@ -8,10 +8,10 @@ class EleveModel extends Model
     public function get_all_eleve()
     {
         $sql = "SELECT id, nom, prenom, date_naissance, moyenne, appreciation FROM eleve";
-        $all_eleve = $this->bdd->prepare($sql);
-        $all_eleve->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $all_eleve->execute();
-        $all_eleves = $all_eleve->fetchAll();
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
+        $stmt->execute();
+        $all_eleves = $stmt->fetchAll();
         return $all_eleves;
     }
     
@@ -21,8 +21,8 @@ class EleveModel extends Model
     public function add_eleve($id, $nom, $prenom, $date_naissance, $moyenne, $appreciation)
     {
         $sql = "INSERT INTO eleve (id, nom, prenom, date_naissance, moyenne, appreciation) VALUES (:id, :nom, :prenom, :date_naissance, :moyenne, :appreciation)";
-        $add_eleve = $this->bdd->prepare($sql);
-        $add_eleve->execute([
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->execute([
             ':id'               => $id, 
             ':nom'              => $nom, 
             ':prenom'           => $prenom, 
@@ -39,8 +39,8 @@ class EleveModel extends Model
     {
         $sql = "UPDATE eleve SET nom = :nom, prenom = :prenom, date_naissance = :date_naissance, moyenne = :moyenne, appreciation = :appreciation WHERE id = :id"; 
                             
-        $update_eleve = $this->bdd->prepare($sql);
-        $update_eleve->execute([
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->execute([
             ':id'               => $id, 
             ':nom'              => $nom, 
             ':prenom'           => $prenom, 
@@ -56,10 +56,10 @@ class EleveModel extends Model
     public function get_one_eleve($id)
     {
         $sql = "SELECT id, nom, prenom, date_naissance, moyenne, appreciation FROM eleve WHERE id = :id";
-        $eleve = $this->bdd->prepare($sql);
-        $eleve->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $eleve->execute([':id' => $id]);
-        $one_eleve = $eleve->fetch();
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
+        $stmt->execute([':id' => $id]);
+        $one_eleve = $stmt->fetch();
 
         return $one_eleve;
     }
@@ -70,8 +70,8 @@ class EleveModel extends Model
     public function delete_eleve($id)
     {
         $sql = "DELETE FROM eleve WHERE id = :id";
-        $delete_eleve = $this->bdd->prepare($sql);
-        $delete_eleve->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $delete_eleve->execute([ 'id' => $id ]);
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
+        $stmt->execute([ 'id' => $id ]);
     }
 }
