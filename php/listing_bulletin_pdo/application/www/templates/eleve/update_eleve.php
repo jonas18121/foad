@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../../tools/tools.php';
+/* require_once '../../../tools/tools.php';
 require_once '../../../config/Database.php';
 require_once '../../../Entity/Eleve.php';
 require_once '../../../Model/Model.php';
@@ -42,10 +42,10 @@ if ($_POST) {
         }
     } 
 }
-
+ */
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -56,7 +56,9 @@ if ($_POST) {
     <script src="../../../librairie/jquery.validate.min.js" ></script>
     <script src="../../js/jq_validation.js" async></script>
 </head>
-<body>
+<body> -->
+
+<?php ob_start() ?>
 <div id="container">
 
     <h2>Affiché un élève</h2>
@@ -114,5 +116,5 @@ if ($_POST) {
         </div>
     </form>
 </div>
-</body>
-</html>
+<?php $content = ob_get_clean(); ?>
+<?php require_once 'www/layout/layout_view.php'; ?>

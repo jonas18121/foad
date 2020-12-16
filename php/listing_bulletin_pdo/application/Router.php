@@ -11,17 +11,96 @@ require_once 'Model/EleveModel.php';
 require_once 'Model/ClasseModel.php';
 require_once 'Entity/Eleve.php';
 require_once 'Entity/Classe.php';
-require_once 'Controleur/EleveControleur.php';
+
+require_once 'Fram/URL.php';
 
 
 class Router
 {
-    private $eleve_controleur;
 
-    public function __construct()
+    public function router_run()
     {
-        $this->eleve_controleur = new EleveControleur;
+        try {
+
+            $fusion_param_url = new URL(array_merge($_GET, $_POST));
+            
+            // pre_var_dump('L 35 Router.php', $fusion_param_url,true);
+            $controleur = $this->creerControleur($fusion_param_url);
+            
+            $action = $this->creerAction($fusion_param_url);
+            
+            $controleur->executerAction($action);
+            
+        }  
+        catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            require_once 'www/templates/error_view.php';
+        }
     }
+
+
+    /**
+     * récupère le paramètre controleur de l'url' reçue
+     * et le concatène pour construire le nom du fichier contrôleur
+     * et renvoyer une instance de la classe associée
+     * 
+     * En l'absence de ce paramètre, 
+     * elle cherche à instancier la classe ControleurAccueil qui correspond au contrôleur par défaut
+     */
+    private function creerControleur(URL $fusion_param_url)
+    {
+        if ($fusion_param_url->existeParametre('controleur')) 
+        {
+            $nom_controleur = $fusion_param_url->getParametre('controleur');
+
+            $nom_controleur = ucfirst(strtolower($nom_controleur));
+        }
+        else {
+            $nom_controleur = 'Eleve'; // Contrôleur par défaut
+        }
+
+        $classe_controleur = $nom_controleur . 'Controleur' ; 
+
+        $fichier_controleur = 'Controleur/' . $classe_controleur . '.php'; 
+
+        if(file_exists($fichier_controleur))
+        {
+            require $fichier_controleur;
+            
+            $controleur = new $classe_controleur();
+
+            $controleur->setUrl($fusion_param_url);
+
+            return $controleur;
+        }
+        else{
+            throw new Exception("Fichier '$fichier_controleur' introuvable");
+        }
+    }
+
+    /**
+     * récupère le paramètre action de l'url reçue et le renvoie
+     * En l'absence de ce paramètre, elle renvoie la valeur « index » qui correspond à l'action par défaut.
+     */
+    private function creerAction(URL $fusion_param_url)
+    {
+        if ($fusion_param_url->existeParametre('action')) 
+        {
+            $nom_action = $fusion_param_url->getParametre('action');
+            
+        }
+        else {
+            $nom_action = 'index'; // Action par défaut
+        }
+
+        return $nom_action;
+    }
+
+
+
+
+
+
 
     public function run()
     {

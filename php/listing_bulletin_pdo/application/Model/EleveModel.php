@@ -22,7 +22,7 @@ class EleveModel extends Model
     {
         $sql = "INSERT INTO eleve (id, nom, prenom, date_naissance, moyenne, appreciation) VALUES (:id, :nom, :prenom, :date_naissance, :moyenne, :appreciation)";
         $stmt = $this->bdd->prepare($sql);
-        $stmt->execute([
+        return $stmt->execute([
             ':id'               => $id, 
             ':nom'              => $nom, 
             ':prenom'           => $prenom, 
@@ -40,7 +40,7 @@ class EleveModel extends Model
         $sql = "UPDATE eleve SET nom = :nom, prenom = :prenom, date_naissance = :date_naissance, moyenne = :moyenne, appreciation = :appreciation WHERE id = :id"; 
                             
         $stmt = $this->bdd->prepare($sql);
-        $stmt->execute([
+        return $stmt->execute([
             ':id'               => $id, 
             ':nom'              => $nom, 
             ':prenom'           => $prenom, 
@@ -72,6 +72,6 @@ class EleveModel extends Model
         $sql = "DELETE FROM eleve WHERE id = :id";
         $stmt = $this->bdd->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
-        $stmt->execute([ 'id' => $id ]);
+        return $stmt->execute([ 'id' => $id ]);
     }
 }
