@@ -38,10 +38,6 @@ class EleveControleur extends Controleur
         $all_eleves     = $this->eleve_model->get_all_eleve();
         $count_eleve    = $this->classe_model->count_nb_eleve();
         $moyenne_classe = $this->classe_model->calc_classe_sum();
-
-        /* foreach ($all_eleves as $value) {
-            pre_var_dump($this->devoir_eleve_model->get_note($value->getId()),null,true);
-        } */
         
         //pre_var_dump('l 37 EleveControleur',$all_eleves, true);
         require_once 'www/templates/eleve/get_eleve.php';
@@ -67,7 +63,7 @@ class EleveControleur extends Controleur
 
             if ($ok) 
             {    
-                header_location('index.php?controleur=eleve&action=controleur_get_all_eleve');
+                header_location('../eleve/controleur_get_all_eleve');
             }else{
                 throw new Exception("Il n'y a un champ mal rempli ");
             }
@@ -106,14 +102,15 @@ class EleveControleur extends Controleur
         
             if ($ok) 
             {    
-                header_location('index.php?controleur=eleve&action=controleur_get_all_eleve');
+                //pre_var_dump('ok', null, true);
+                header_location('../../eleve/controleur_get_all_eleve');
             }else{
                 throw new Exception("Il n'y a un champ mal rempli ");
             }
         }
 
         // pre_var_dump($this->url,null, true);
-        $id = $this->url->getParametre("id_eleve");
+        $id = $this->url->getParametre("id");
         $one_eleve = $this->eleve_model->get_one_eleve($id);
         require_once 'www/templates/eleve/update_eleve.php';
     }
@@ -131,7 +128,7 @@ class EleveControleur extends Controleur
 
             if ($ok) 
             {    
-                header_location('index.php?controleur=eleve&action=controleur_get_all_eleve');
+                header_location('eleve/controleur_get_all_eleve');
             }else{
                 throw new \Exception("Il n'y a un truc qui ne va pas ");
                 echo "Il n'y a un truc qui ne va pas ";

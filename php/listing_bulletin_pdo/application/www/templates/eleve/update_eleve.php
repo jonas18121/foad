@@ -44,7 +44,7 @@ if ($_POST) {
 }
  */
 
- pre_var_dump('l 47 update_eleve.php', $one_eleve );
+//  pre_var_dump('l 47 update_eleve.php', $one_eleve );
 ?>
 
 <!-- <!DOCTYPE html>

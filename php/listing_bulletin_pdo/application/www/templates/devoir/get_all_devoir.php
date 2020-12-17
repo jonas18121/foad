@@ -2,7 +2,7 @@
 <div id="">
 
     <h2>Gestion des devoirs</h2>
-    <a href="index.php?controleur=devoir&action=controleur_create_devoir">Ajouter un devoir</a>
+    <a href="devoir/controleur_create_devoir">Ajouter un devoir</a>
 
     <table class='table'>
         <thead>
@@ -22,9 +22,9 @@
                     <td><?= $all_devoirs[$i]->getContenu() ?></td>
                     <td><?= $all_devoirs[$i]->getDate_publication()->format('d/m/Y') ?></td>
                 
-                    <td><a href="index.php?controleur=devoir&action=controleur_update_devoir&id_devoir=<?= $all_devoirs[$i]->getId() ?>">Afficher et Modifier</a></td>
+                    <td><a href="devoir/controleur_update_devoir/<?= $all_devoirs[$i]->getId() ?>">Afficher et Modifier</a></td>
                     <td>
-                        <form action="index.php?controleur=devoir&action=controleur_delete_devoir" method="post">
+                        <form action="devoir/controleur_delete_devoir" method="post">
                             <div>
                                 <input type="hidden" name="delete" value="<?= $all_devoirs[$i]->getId() ?>">
                             </div>

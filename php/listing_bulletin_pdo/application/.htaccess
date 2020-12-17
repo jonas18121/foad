@@ -1,0 +1,33 @@
+# Réécrit une URL de type xxx/yyy/zzz en index.php?controleur=xxx&action=yyy&id=zzz
+
+#-----------------------------------------------
+# Le serveur doit suivre les liens symboliques :
+#-----------------------------------------------
+Options +FollowSymlinks
+
+#-----------------------------------------------
+# activation du module de Réécriture d'URL
+#-----------------------------------------------
+RewriteEngine On
+
+#-----------------------------------------------
+# condition du module de Réécriture d'URL
+#-----------------------------------------------
+
+# RewriteCond %{REQUEST_URI} !\.(?:css|less|js|jpe?g|gif|png)$ [NC]
+# RewriteCond %{REQUEST_URI} !^.*\.(jpg|css|js|gif|png)$ [NC]
+
+
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]
+
+
+#-----------------------------------------------
+# règle de Réécriture d'url
+#-----------------------------------------------
+
+
+RewriteRule ^([a-zA-Z]+)/(.+)/([0-9]+)$    index.php?controleur=$1&action=$2&id=$3 [L]
+RewriteRule ^([a-zA-Z]+)/(.+)/?$    index.php?controleur=$1&action=$2 [L]

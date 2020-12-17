@@ -64,6 +64,7 @@ class Router
             $nom_controleur = 'Eleve'; // Contrôleur par défaut
         }
 
+        // pre_var_dump('l 67 router.php',  $fusion_param_url->getParametre('controleur'), true );
         $classe_controleur = $nom_controleur . 'Controleur' ; 
 
         $fichier_controleur = 'Controleur/' . $classe_controleur . '.php'; 
