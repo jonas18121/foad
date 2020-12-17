@@ -2,7 +2,7 @@
 
     <div>
         <h2>Gestion des élèves</h2>
-        <a href="index.php?controleur=eleve&action=controleur_create_eleve">Ajouter un élève</a>
+        <a href="eleve/controleur_create_eleve">Ajouter un élève</a>
 
         <table class='table'>
             <thead>
@@ -25,7 +25,7 @@
                         <td><?= $all_eleves[$i]->getDate_naissance()->format('d/m/Y') ?></td>
                         <td><?= $all_eleves[$i]->getMoyenne() ?></td>
                         <td><?= $all_eleves[$i]->getAppreciation() ?></td>
-                        <td><a href="index.php?controleur=eleve&action=controleur_update_eleve&id_eleve=<?= $all_eleves[$i]->getId() ?>">Afficher et Modifier</a></td>
+                        <td><a href="eleve/controleur_update_eleve/<?= $all_eleves[$i]->getId() ?>">Afficher et Modifier</a></td>
                         <td>
                             <form action="index.php?controleur=eleve&action=controleur_delete_eleve" method="post">
                                 <div>

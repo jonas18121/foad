@@ -39,18 +39,6 @@ if ($_POST) {
 //  pre_var_dump($_POST, null, true);
 
 ?>
-<!-- <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet/less" type="text/css" href="../../css/styles.less" />
-    <script src="../../../librairie/less.js"></script>
-    <script src="../../../librairie/jquery-3.5.1.min.js"></script>
-    <script src="../../../librairie/jquery.validate.min.js" ></script>
-    <script src="../../js/jq_validation.js" async></script>
-</head>
-<body> -->
 <?php ob_start() ?>
 
     <div id="container">
@@ -69,7 +57,7 @@ if ($_POST) {
                 <input type="date" name="date_naissance" id="date_naissance" placeholder="Date de naissance de l'élève" required>
             </div>
             <div>
-                <input type="text" name="moyenne" id="moyenne" placeholder="Moyenne de l'élève" required>
+                <input type="text" name="moyenne" id="moyenne" placeholder="Moyenne de l'élève (facultative)" required>
             </div>
             <div>
                 <textarea name="appreciation" id="appreciation" cols="30" rows="10" placeholder=" Commentaire sur l'élève" required></textarea>

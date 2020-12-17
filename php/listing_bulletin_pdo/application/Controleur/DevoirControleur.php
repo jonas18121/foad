@@ -43,7 +43,7 @@ class DevoirControleur extends Controleur
 
             if ($ok) 
             {    
-                header_location('index.php?controleur=devoir&action=controleur_get_all_devoir');
+                header_location('../devoir/controleur_get_all_devoir');
             }else{
                 throw new Exception("Il n'y a un champ mal rempli ");
             }
@@ -71,14 +71,14 @@ class DevoirControleur extends Controleur
     
             if ($ok) 
             {    
-                header_location('index.php?controleur=devoir&action=controleur_get_all_devoir');
+                header_location('../../devoir/controleur_get_all_devoir');
             }else{
                 throw new Exception("Il n'y a un champ mal rempli ");
             }
         }
 
         // pre_var_dump($this->url,null, true);
-        $id = $this->url->getParametre("id_devoir");
+        $id = $this->url->getParametre("id");
         $one_devoir = $this->devoir_model->get_one_devoir($id);
         require_once 'www/templates/devoir/update_devoir.php';
     }
@@ -96,7 +96,7 @@ class DevoirControleur extends Controleur
 
             if ($ok) 
             {    
-                header_location('index.php?controleur=devoir&action=controleur_get_all_devoir');
+                header_location('../devoir/controleur_get_all_devoir');
             }else{
                 throw new \Exception("Il n'y a un truc qui ne va pas ");
                 echo "Il n'y a un truc qui ne va pas ";

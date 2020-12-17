@@ -41,7 +41,7 @@ class URL
      */
     public function getParametre($nom)
     {
-        //pre_var_dump('L 42 URL.php',$this->parametres[$nom], true );
+        // pre_var_dump('L 42 URL.php',$this->parametres, true );
         if ($this->existeParametre($nom)) {
 
             return $this->parametres[$nom]; // exemple : "billet"
