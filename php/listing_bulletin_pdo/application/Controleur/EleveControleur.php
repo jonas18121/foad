@@ -15,11 +15,13 @@ class EleveControleur extends Controleur
 
     private $eleve_model;
     private $classe_model;
+    private $devoir_eleve_model;
 
     public function __construct()
     {
         $this->eleve_model  = new EleveModel();
         $this->classe_model = new ClasseModel();
+        $this->devoir_eleve_model = new DevoirEleveModel();
     }
 
     public function index()
@@ -37,6 +39,11 @@ class EleveControleur extends Controleur
         $count_eleve    = $this->classe_model->count_nb_eleve();
         $moyenne_classe = $this->classe_model->calc_classe_sum();
 
+        /* foreach ($all_eleves as $value) {
+            pre_var_dump($this->devoir_eleve_model->get_note($value->getId()),null,true);
+        } */
+        
+        //pre_var_dump('l 37 EleveControleur',$all_eleves, true);
         require_once 'www/templates/eleve/get_eleve.php';
     }
 
@@ -78,14 +85,24 @@ class EleveControleur extends Controleur
     {
         if (isset($_POST) && !empty($_POST)) 
         {
-            $id             = (int) clean_word_entrant($_POST['id']);
-            $nom            = clean_word_entrant($_POST['nom']);
-            $prenom         = clean_word_entrant($_POST['prenom']);
-            $date_naissance = clean_word_entrant($_POST['date_naissance']);
-            $moyenne        = clean_word_entrant($_POST['moyenne']);
-            $appreciation   = clean_word_entrant($_POST['appreciation']);
-            
-            $ok = $this->eleve_model->update_eleve($nom, $prenom, $date_naissance, $moyenne, $appreciation, $id);
+            if (isset($_POST['note']) && !empty($_POST['note'])) 
+            {
+                $id             = (int) clean_word_entrant($_POST['id']);
+                $note            = clean_word_entrant($_POST['note']);
+
+                $ok = $this->eleve_model->update_moyenne_eleve($note, $id);
+            }
+            else 
+            {    
+                $id             = (int) clean_word_entrant($_POST['id']);
+                $nom            = clean_word_entrant($_POST['nom']);
+                $prenom         = clean_word_entrant($_POST['prenom']);
+                $date_naissance = clean_word_entrant($_POST['date_naissance']);
+                $moyenne        = clean_word_entrant($_POST['moyenne']);
+                $appreciation   = clean_word_entrant($_POST['appreciation']);
+                
+                $ok = $this->eleve_model->update_eleve($nom, $prenom, $date_naissance, $moyenne, $appreciation, $id);
+            }
         
             if ($ok) 
             {    

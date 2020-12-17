@@ -5,6 +5,7 @@ class Devoir
     public $id;
     public $titre;
     public $contenu;
+    public $date_publication;
 
     public function __construct(){}
 
@@ -64,6 +65,26 @@ class Devoir
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date_publication
+     */ 
+    public function getDate_publication()
+    {
+        return new DateTime($this->date_publication);
+    }
+
+    /**
+     * Set the value of date_publication
+     *
+     * @return  self
+     */ 
+    public function setDate_publication($date_publication)
+    {
+        $this->date_publication = new DateTime($date_publication);
 
         return $this;
     }

@@ -14,6 +14,8 @@
         <nav>
             <ul>
                 <li><a href="index.php?controleur=eleve&action=controleur_get_all_eleve"> Accueil</a></li>
+                <li><a href="index.php?controleur=devoir&action=controleur_get_all_devoir"> Gestion devoir</a></li>
+                <li><a href="index.php?controleur=devoirEleve&action=controleur_get_all_devoir_eleve">Notes des élèves/devoirs</a></li>
             </ul>
         </nav>
     </header>

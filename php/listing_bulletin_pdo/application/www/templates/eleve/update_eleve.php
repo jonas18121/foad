@@ -43,6 +43,8 @@ if ($_POST) {
     } 
 }
  */
+
+ pre_var_dump('l 47 update_eleve.php', $one_eleve );
 ?>
 
 <!-- <!DOCTYPE html>
@@ -69,6 +71,25 @@ if ($_POST) {
         <p>date de naissance    : <?= $one_eleve->getDate_naissance()->format('d/m/Y')  ?> </p>
         <p>moyenne              : <?= $one_eleve->getMoyenne() ?> </p>
         <p>appreciation         : <?= $one_eleve->getAppreciation() ?> </p>
+
+        <?php if($one_eleve->getMoyenne() != $one_eleve->{'moyenne_eleve'} ) : ?> 
+            <form action="" method="post">
+                <div>
+                    <div>
+                        <label for="note">Nouvelle moyenne de l'élève : </label>
+                    </div>
+                    <input type="text" name="note" id="note" value="<?= $one_eleve->{'moyenne_eleve'} ?>">
+                </div>
+
+                <div>
+                    <input type="hidden" name="id" value="<?= $one_eleve->getId() ?>">
+                </div>
+
+                <div>
+                    <input type="submit" value="Actualiser la moyenne de l'élève">
+                </div>
+            </form>
+        <?php endif; ?>
     </div>
     
     <h2>Modifier l' élève</h2>
