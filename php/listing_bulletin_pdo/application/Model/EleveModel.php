@@ -8,8 +8,10 @@ class EleveModel extends Model
     public function get_all_eleve()
     {
         $sql = "SELECT id, nom, prenom, date_naissance, moyenne, appreciation FROM eleve";
+        // $sql = "SELECT eleve.id, eleve.nom, eleve.prenom, eleve.date_naissance, eleve.moyenne, eleve.appreciation, devoir_eleve.note FROM eleve INNER JOIN devoir_eleve ON devoir_eleve.id_eleve = eleve.id";
         $stmt = $this->bdd->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
+        // $stmt->setFetchMode(PDO::FETCH_CLASS, DevoirEleve::class);
         $stmt->execute();
         $all_eleves = $stmt->fetchAll();
         return $all_eleves;
@@ -51,11 +53,32 @@ class EleveModel extends Model
     }
 
     /**
+     * modifier la moyenne d'un eleve
+     */
+    public function update_moyenne_eleve($moyenne, $id)
+    {
+        $sql = "UPDATE eleve SET  moyenne = :moyenne WHERE id = :id"; 
+                            
+        $stmt = $this->bdd->prepare($sql);
+        return $stmt->execute([
+            ':id'               => $id, 
+            ':moyenne'          => $moyenne
+        ]);
+    }
+
+    /**
      * selectionner un eleve
      */
     public function get_one_eleve($id)
     {
-        $sql = "SELECT id, nom, prenom, date_naissance, moyenne, appreciation FROM eleve WHERE id = :id";
+        // $sql = "SELECT id, nom, prenom, date_naissance, moyenne, appreciation FROM eleve WHERE id = :id";
+        $sql = 'SELECT eleve.id, nom, prenom, date_naissance, moyenne, appreciation, ROUND(SUM(note)/COUNT(id_devoir)) AS moyenne_eleve 
+            FROM eleve 
+            INNER JOIN devoir_eleve
+            On devoir_eleve.id_eleve = eleve.id
+            WHERE eleve.id = :id'
+        ;
+
         $stmt = $this->bdd->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, Eleve::class);
         $stmt->execute([':id' => $id]);

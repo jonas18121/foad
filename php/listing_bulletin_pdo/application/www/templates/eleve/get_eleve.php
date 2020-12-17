@@ -1,6 +1,7 @@
 <?php ob_start() ?>
 
     <div>
+        <h2>Gestion des élèves</h2>
         <a href="index.php?controleur=eleve&action=controleur_create_eleve">Ajouter un élève</a>
 
         <table class='table'>

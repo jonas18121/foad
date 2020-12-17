@@ -9,8 +9,12 @@ require_once 'tools/tools.php';
 require_once 'Model/Model.php';
 require_once 'Model/EleveModel.php';
 require_once 'Model/ClasseModel.php';
+require_once 'Model/DevoirEleveModel.php';
+require_once 'Model/DevoirModel.php';
 require_once 'Entity/Eleve.php';
 require_once 'Entity/Classe.php';
+require_once 'Entity/DevoirEleve.php';
+require_once 'Entity/Devoir.php';
 
 require_once 'Fram/URL.php';
 
@@ -53,7 +57,8 @@ class Router
         {
             $nom_controleur = $fusion_param_url->getParametre('controleur');
 
-            $nom_controleur = ucfirst(strtolower($nom_controleur));
+            // $nom_controleur = ucfirst(strtolower($nom_controleur));
+            $nom_controleur = ucfirst($nom_controleur);
         }
         else {
             $nom_controleur = 'Eleve'; // Contrôleur par défaut
