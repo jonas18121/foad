@@ -6,10 +6,14 @@ require_once 'Fram/Controleur.php';
 class DevoirControleur extends Controleur
 {
     private $devoir_model;
+    private $eleve_model;
+    private $devoir_eleve_model;
 
     public function __construct()
     {
         $this->devoir_model = new DevoirModel();
+        $this->eleve_model = new EleveModel();
+        $this->devoir_eleve_model = new DevoirEleveModel();
     }
 
     public function index()
@@ -61,9 +65,20 @@ class DevoirControleur extends Controleur
     {
         if (isset($_POST) && !empty($_POST)) 
         {
-            $id             = (int) clean_word_entrant($_POST['id']);
-            $titre          = clean_word_entrant($_POST['titre']);
-            $contenu        = clean_word_entrant($_POST['contenu']);
+            if (isset($_POST['note']) && !empty($_POST['note']) && isset($_POST['id_eleve']) && !empty($_POST['id_eleve'])) {
+                
+                $note       = (int) clean_word_entrant($_POST['note']);
+                $id_eleve   = (int) clean_word_entrant($_POST['id_eleve']);
+                $id_devoir  = (int) clean_word_entrant($_POST['id_devoir']);
+
+                $ok = $this->devoir_eleve_model->add_note_for_eleve($note, $id_eleve, $id_devoir);
+            }
+            else 
+            { 
+                $id             = (int) clean_word_entrant($_POST['id']);
+                $titre          = clean_word_entrant($_POST['titre']);
+                $contenu        = clean_word_entrant($_POST['contenu']);
+            }
             
             // pre_var_dump($id ,null, true);
             $ok = $this->devoir_model->update_devoir($titre, $contenu, $id);
@@ -80,6 +95,7 @@ class DevoirControleur extends Controleur
         // pre_var_dump($this->url,null, true);
         $id = $this->url->getParametre("id");
         $one_devoir = $this->devoir_model->get_one_devoir($id);
+        $all_eleves = $this->eleve_model->get_all_eleve();
         require_once 'www/templates/devoir/update_devoir.php';
     }
 
