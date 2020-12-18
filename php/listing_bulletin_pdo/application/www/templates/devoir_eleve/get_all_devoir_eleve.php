@@ -12,6 +12,7 @@
                 <th>Nom élève </th>
                 <th>Prénom élève</th>
                 <th>Note élève</th>
+                <th>supprimer</th>
             </tr>
         </thead>
         <tbody class='tbody'>
@@ -23,6 +24,17 @@
                     <td><?= $all_devoir_eleves[$i]->{'nom'} ?></td>
                     <td><?= $all_devoir_eleves[$i]->{'prenom'} ?></td>
                     <td><?= $all_devoir_eleves[$i]->getNote() ?></td>
+                    <td>
+                        <form action="devoirEleve/controleur_delete_note" method="post">
+                            <div>
+                                <input type="hidden" name="delete" value="<?= $all_devoir_eleves[$i]->getId() ?>">
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Supprimer">
+                            </div>
+                        </form>
+                    </td>
                 
                     <!-- <td><a href="index.php?controleur=devoir&action=controleur_update_devoir&id_devoir=<?//= $all_devoirs[$i]->getId() ?>">Afficher et Modifier</a></td>
                     <td>
