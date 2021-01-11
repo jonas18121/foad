@@ -217,3 +217,41 @@ puis on créer une fixture
 et pour executé notre fixtures 
 
     - php bin/console doctrine:fixtures:load
+
+## ParamConverter
+
+pour pouvoir utiliser le ParmConverter, il faut s'assuré d'avoir le bundle sensio/framework-extra-bundle
+
+    - composer require sensio/framework-extra-bundle
+
+puis mettre ce fichier dans le controlleur
+
+    - use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+on peut mettre ça aussi
+
+    - use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+on peut aussi utilser juste ce fichier a la place de Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+    - use Symfony\Component\Routing\Annotation\Route;
+
+
+## Theme bootstrap 
+
+    # config/packages/twig.yaml
+    twig:
+        form_themes: ['bootstrap_4_layout.html.twig']
+
+et mettre la commande si dessus dans nos fichier twig
+
+    {% form_theme variable_de_mon_formulaire 'bootstrap_4_layout.html.twig' %}
+
+
+## Les formulaires
+
+pour créer un formulaire installé : 
+
+    -  composer require symfony/form
+
+    vidéo 2 stoppé a 30min

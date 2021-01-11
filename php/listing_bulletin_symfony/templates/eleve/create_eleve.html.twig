@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un eleve{% endblock %}
+
+{% form_theme formEleve 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <div id="container">
+        <h1>Ajouter un élève</h1>
+
+        {{ form_start(formEleve) }}
+
+            <div class="">
+                <label>Nom</label>
+                {{ form_widget(formEleve.nom, { attr : { class : '' }} ) }}
+                {{ form_errors(formEleve.nom) }}
+            </div>
+
+            <div class="">
+                <label>Prénom</label>
+                {{ form_widget(formEleve.prenom, { attr : { class : '' }} ) }}
+                {{ form_errors(formEleve.prenom) }}
+            </div>
+
+            <div class="">
+                <label>Date de naissance</label>
+                {{ form_widget(formEleve.dateNaissanceAt, { attr : { class : '' }} ) }}
+                {{ form_errors(formEleve.dateNaissanceAt) }}
+            </div>
+
+            <div class="">
+                <label>Moyenne</label>
+                {{ form_widget(formEleve.moyenne, { attr : { class : '' }} ) }}
+                {{ form_errors(formEleve.moyenne) }}
+            </div>
+
+            <div class="">
+                <label>Appréciation</label>
+                {{ form_widget(formEleve.appreciation, { attr : { class : '' }} ) }}
+                {{ form_errors(formEleve.appreciation) }}
+            </div>
+
+            <div class="">
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(formEleve) }}
+    </div>
+
+
+{% endblock %}
