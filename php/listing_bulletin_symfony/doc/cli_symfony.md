@@ -66,6 +66,7 @@ si on veut voir la liste de commande que propose maker-bundle une fois installer
     - php bin/console list make
 
 voici la liste :
+
         make:auth                   Creates a Guard authenticator of different flavors
         make:command                Creates a new console command class
         make:controller             Creates a new controller class
@@ -110,6 +111,7 @@ on installe le symfony/orm-pack qui contient :
     - composer require symfony/orm-pack
 
 La liste de commande doctrine :
+
     doctrine:cache:clear-collection-region     
     doctrine:cache:clear-entity-region
     doctrine:cache:clear-metadata
