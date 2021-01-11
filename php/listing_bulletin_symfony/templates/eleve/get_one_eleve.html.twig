@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div id="container">
+
+        <h2>Affiché un élève</h2>
+        
+        <div>
+            <p>nom                  : {{ eleve.nom }}</p>
+            <p>prenom               : {{ eleve.prenom }} </p>
+            <p>date de naissance    : {{ eleve.dateNaissanceAt | date('d/m/Y H:i') }} </p>
+            <p>moyenne              : {{ eleve.moyenne }} </p>
+            <p>appreciation         : {{ eleve.appreciation }} </p>
+
+            <?php if($one_eleve->getMoyenne() != $one_eleve->{'moyenne_eleve'} ) : ?> 
+                <form action="" method="post">
+                    <div>
+                        <div>
+                            <label for="note">Nouvelle moyenne de l'élève : </label>
+                        </div>
+                        <input type="text" name="note" id="note" value="<?= $one_eleve->{'moyenne_eleve'} ?>">
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="id" value="<?= $one_eleve->getId() ?>">
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Actualiser la moyenne de l'élève">
+                    </div>
+                </form>
+            <?php endif; ?>
+        </div>
+        
+        <h2>Modifier l' élève</h2>
+
+        <div id="error"><span></span></div>
+
+        <form action="" method="post" id="form_add_eleve">
+            <div>
+                <div>
+                    <label for="nom">nom : </label>
+                </div>
+                <input type="text" name="nom" id="nom" value="<?= $one_eleve->getNom() ?>">
+            </div>
+            <div>
+                <div>
+                    <label for="prenom">prenom : </label>
+                </div>
+                <input type="text" name="prenom" id="prenom" value="<?= $one_eleve->getPrenom() ?>">
+            </div>
+            <div>
+                <div>
+                    <label for="date_naissance">date de naissance (réécrire la date) : </label>
+                </div>
+                <input type="date" name="date_naissance" id="date_naissance" value="<?= $one_eleve->getDate_naissance()->format('d/m/Y') ?>">
+                <span><?= $one_eleve->getDate_naissance()->format('d/m/Y') ?></span>
+            </div>
+            <div>
+                <div>
+                    <label for="moyenne">moyenne : </label>
+                </div>
+                <input type="text" name="moyenne" id="moyenne" value="<?= $one_eleve->getMoyenne() ?>">
+            </div>
+            <div>
+                <div>
+                    <label for="appreciation">appreciation : </label>
+                </div>
+                <textarea name="appreciation" id="appreciation" cols="30" rows="10" ><?= $one_eleve->getAppreciation() ?></textarea>
+            </div>
+            <div>
+                <input type="hidden" name="id" value="<?= $one_eleve->getId() ?>">
+            </div>
+        
+            <div>
+                <input type="submit" value="Modifier">
+            </div>
+        </form>
+    </div>
+{% endblock %}
