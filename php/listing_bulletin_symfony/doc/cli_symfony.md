@@ -118,9 +118,13 @@ puis répondre on question qui seront poser.
 on installe le symfony/orm-pack qui contient :
 
 `composer/package-versions-deprecated: *`
+
 `doctrine/doctrine-bundle: *`
+
 `doctrine/doctrine-migrations-bundle: *`
+
 `doctrine/orm: *`
+
 `symfony/proxy-manager-bridge: *`
 
     - composer require symfony/orm-pack
