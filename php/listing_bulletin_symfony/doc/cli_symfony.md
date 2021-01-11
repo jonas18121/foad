@@ -4,35 +4,43 @@
 ## Créer une application Symfony avec la commande symfony
 
 pour avoir la dernière version complète avec toutes les dépendances
+
     - symfony new my_project_name --full
 
 pour avoir la dernière version en mode microservice, API
+
     - symfony new my_project_name
 
 
 ## Créer une application Symfony avec la commande composer
 
 pour avoir la dernière version complète avec toutes les dépendances
+
     - composer create-project symfony/website-skeleton my_project_name
 
 pour avoir la dernière version en mode microservice, API
+
     - composer create-project symfony/skeleton my_project_name
 
 ## Créer une application Symfony avec une version précis avec la commande symfony
 
 pour avoir la dernière version complète avec toutes les dépendances
+
     - symfony new my_project_name --version=4.4 --full
 
 pour avoir la dernière version en mode microservice, API
+
     - symfony new my_project_name --version=4.4
 
 
 ## Créer une application Symfony avec une version précis avec la commande composer
 
 pour avoir la dernière version complète avec toutes les dépendances
+
     - composer create-project symfony/website-skeleton:"^4.4" my_project_name
 
 pour avoir la dernière version en mode microservice, API
+
     - composer create-project symfony/skeleton:"^4.4" my_project_name
 
 `S'il y a des problème lors de la creation de l'application , faire la même opération dans la CMD de git bash`
@@ -45,13 +53,16 @@ pour avoir la dernière version en mode microservice, API
 ## Faire tourner notre application avec la commande composer
 
 On telecharge un serveur personnalisé via composer, qu'on utiliser seulement lorsqu'on sera en mode développement
+
     - composer require server --dev
 
 puis on tape la commande
+
     - php bin/console server:run
 
 
 ## installer le moteur de templating Twig
+
     - composer require symfony/twig-bundle
 
 ## Créer un Controlleur avec la CLI
@@ -60,9 +71,11 @@ Symfony Maker vous aide à créer des commandes vides, des contrôleurs,
 des classes de formulaire, des tests et plus encore afin que vous puissiez oublier l'écriture de code standard.
 
 telecharger maker-bundle
+
     - composer require symfony/maker-bundle --dev
 
 si on veut voir la liste de commande que propose maker-bundle une fois installer
+
     - php bin/console list make
 
 voici la liste :
@@ -90,9 +103,11 @@ voici la liste :
         make:voter                  Creates a new security voter class
 
 installer les annotaions de doctrine
+
     - composer require doctrine/annotations
 
 Créer le controlleur
+
     - php bin/console make:controller
 
 puis répondre on question qui seront poser.
@@ -165,6 +180,7 @@ puis répondre aux question poser
 ça nous créer une entité et une repository
 
 exemple : 
+
     created: src/Entity/Eleve.php
     created: src/Repository/EleveRepository.php
 
@@ -189,6 +205,7 @@ on installe le composant doctrine/doctrine-fixtures-bundle
     - composer require doctrine/doctrine-fixtures-bundle
 
 puis on créer une fixture
+
     - php bin/console make:fixtures
 
 ça créera un dossier DataFixtures dans lequel , il y aura notre fichier fixtures
