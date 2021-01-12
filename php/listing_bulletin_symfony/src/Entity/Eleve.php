@@ -52,6 +52,11 @@ class Eleve
      */
     private $appreciation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ClasseDEcole::class, inversedBy="eleves")
+     */
+    private $classeDEcole;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,6 +118,18 @@ class Eleve
     public function setAppreciation(string $appreciation): self
     {
         $this->appreciation = $appreciation;
+
+        return $this;
+    }
+
+    public function getClasseDEcole(): ?ClasseDEcole
+    {
+        return $this->classeDEcole;
+    }
+
+    public function setClasseDEcole(?ClasseDEcole $classeDEcole): self
+    {
+        $this->classeDEcole = $classeDEcole;
 
         return $this;
     }

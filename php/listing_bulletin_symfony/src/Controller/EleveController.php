@@ -82,4 +82,15 @@ class EleveController extends AbstractController
             'formEleve' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/delete/{id}", name="eleve_delete", requirements={"id": "\d+"})
+     */
+    public function delete_eleve(Eleve $eleve, EntityManagerInterface $manager)
+    {
+        $manager->remove($eleve);
+        $manager->flush();
+
+        return $this->redirectToRoute('eleve');
+    }
 }
