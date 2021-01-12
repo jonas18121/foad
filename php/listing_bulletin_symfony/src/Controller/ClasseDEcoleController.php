@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ClasseDEcoleType;
 use App\Entity\ClasseDEcole;
 use App\Repository\ClasseDEcoleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,9 @@ class ClasseDEcoleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/classe_d_ecole/add", name="classe_add")
+     */
     public function create_classe(Request $request, EntityManagerInterface $manager)
     {
         $classe = new ClasseDEcole();
