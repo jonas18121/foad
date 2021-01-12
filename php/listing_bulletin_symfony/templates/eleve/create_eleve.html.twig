@@ -12,9 +12,15 @@
         {{ form_start(formEleve) }}
 
             <div class="">
-                <label>Nom</label>
+            
+                <div class="form-error">
+                    {{ form_errors(formEleve.nom) }}
+                </div>
+
+                <label>{{ form_label(formEleve.nom) }}</label>
                 {{ form_widget(formEleve.nom, { attr : { class : '' }} ) }}
-                {{ form_errors(formEleve.nom) }}
+
+                <small> {{ form_help(formEleve.nom) }} </small>
             </div>
 
             <div class="">

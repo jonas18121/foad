@@ -250,8 +250,18 @@ et mettre la commande si dessus dans nos fichier twig
 
 ## Les formulaires
 
+`comment customiser un formulaire` : https://symfony.com/doc/current/form/form_customization.html
+
 pour créer un formulaire installé : 
 
     -  composer require symfony/form
 
-    vidéo 2 stoppé a 30min
+puis créer une classe FromType :
+
+    - php bin/console make:form
+
+
+Exécutez la commande suivante pour vérifier que le type de formulaire a été correctement enregistré dans l'application:
+
+    - php bin/console debug:form
+
