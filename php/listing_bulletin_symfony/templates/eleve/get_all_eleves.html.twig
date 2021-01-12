@@ -34,17 +34,7 @@
                         <td>{{ eleve.appreciation }}</td>
                         <td><a href="{{ path('eleve_get_one', { 'id' : eleve.id } ) }}">Afficher</a></td>
                         <td><a href="{{ path('eleve_edit', { 'id' : eleve.id } ) }}">Modifier</a></td>
-                        <td>
-                            <form action="index.php?controleur=eleve&action=controleur_delete_eleve" method="post">
-                                <div>
-                                    <input type="hidden" name="delete" value="{{ eleve.id }}">
-                                </div>
-
-                                <div>
-                                    <input type="submit" value="Supprimer">
-                                </div>
-                            </form>
-                        </td>
+                        <td><a href="{{ path('eleve_delete', { 'id' : eleve.id } ) }}">Supprimer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
