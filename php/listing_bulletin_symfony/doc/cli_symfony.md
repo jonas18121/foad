@@ -60,6 +60,19 @@ puis on tape la commande
 
     - php bin/console server:run
 
+## installer la toolbar
+
+La toolbar, la barre d'outils qui contient les bundles
+
+`symfony/debug-bundle: *`
+
+`symfony/monolog-bundle: ^3.0`
+
+`symfony/profiler-pack: *`
+
+`symfony/var-dumper: *`
+
+    - composer require symfony/debug-pack
 
 ## installer le moteur de templating Twig
 
@@ -248,7 +261,7 @@ et mettre la commande si dessus dans nos fichier twig
     {% form_theme variable_de_mon_formulaire 'bootstrap_4_layout.html.twig' %}
 
 
-## Les formulaires
+## Les formulaires avec CLI
 
 `comment customiser un formulaire` : https://symfony.com/doc/current/form/form_customization.html
 
@@ -264,4 +277,6 @@ puis créer une classe FromType :
 Exécutez la commande suivante pour vérifier que le type de formulaire a été correctement enregistré dans l'application:
 
     - php bin/console debug:form
+
+
 
