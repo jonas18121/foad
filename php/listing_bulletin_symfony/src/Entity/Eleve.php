@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EleveRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EleveRepository::class)
@@ -19,11 +20,15 @@ class Eleve
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2, max=255, minMessage="Ecrivez entre 2 et 255 caractères", maxMessage="Ecrivez entre 2 et 255 caractères" )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2, max=255, minMessage="Ecrivez entre 2 et 255 caractères", maxMessage="Ecrivez entre 2 et 255 caractères")
      */
     private $prenom;
 
@@ -34,11 +39,16 @@ class Eleve
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=1, max=2, minMessage="Ecrivez entre 1 et 2 caractères ", maxMessage="Ecrivez entre 1 et 2 caractères")
+     * @Assert\Positive
      */
     private $moyenne;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2, minMessage="Ecrivez minimun 2 caractères")
      */
     private $appreciation;
 

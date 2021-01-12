@@ -60,7 +60,7 @@ puis on tape la commande
 
     - php bin/console server:run
 
-## installer la toolbar
+## installer la toolbar ( la barre d'outils )
 
 La toolbar, la barre d'outils qui contient les bundles
 
@@ -245,7 +245,7 @@ on peut mettre ça aussi
 
     - use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-on peut aussi utilser juste ce fichier a la place de Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+on peut aussi utilser juste ce namespace a la place de Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
     - use Symfony\Component\Routing\Annotation\Route;
 
@@ -280,3 +280,12 @@ Exécutez la commande suivante pour vérifier que le type de formulaire a été 
 
 
 
+## Les validations 
+
+pour créer un validator installé :
+
+    - composer require symfony/validator doctrine/annotations
+
+pour débuger un validator :
+
+    - php bin/console debug:validator namespace_de_class
