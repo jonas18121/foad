@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un eleve{% endblock %}
+{% block title %}Modifier un eleve{% endblock %}
 
 {% form_theme formEleve 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 
     <div id="container">
-        <h1>Ajouter un élève</h1>
+        <h1>Modifier un élève</h1>
 
         {{ form_start(formEleve) }}
 
@@ -87,7 +87,7 @@
             </div>
 
             <div class="">
-                <button type="submit">Enregistrer</button>
+                <button type="submit">Modifier</button>
             </div>
 
         {{ form_end(formEleve) }}

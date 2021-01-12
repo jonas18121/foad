@@ -26,9 +26,9 @@ class EleveController extends AbstractController
     }
 
     /**
-     * @Route("/eleve/{id}", name="eleve_show", requirements={"id": "\d+"}, methods="GET")
+     * @Route("/eleve/{id}", name="eleve_get_one", requirements={"id": "\d+"}, methods="GET")
      */
-    public function get_one_eleve_and_edit(Eleve $eleve)
+    public function get_one_eleve(Eleve $eleve)
     {
         return $this->render('eleve/get_one_eleve.html.twig', [
             'eleve' => $eleve
@@ -46,9 +46,39 @@ class EleveController extends AbstractController
 
         $form->handleRequest($request);
 
-        dump($eleve);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $manager->persist($eleve);
+            $manager->flush();
+
+            return $this->redirectToRoute('eleve');
+        }
 
         return $this->render('eleve/create_eleve.html.twig', [
+            'formEleve' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/eleve/edit/{id}", name="eleve_edit", requirements={"id": "\d+"}, methods={"GET", "PUT"})
+     */
+    public function edit_eleve(Eleve $eleve, Request $request, EntityManagerInterface $manager)
+    {
+        // $eleve = new Eleve();
+
+        $form = $this->createForm(EleveType::class, $eleve, [ 'method' => 'PUT' ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $manager->persist($eleve);
+            $manager->flush();
+
+            return $this->redirectToRoute('eleve');
+        }
+
+        return $this->render('eleve/edit_eleve.html.twig', [
             'formEleve' => $form->createView()
         ]);
     }
