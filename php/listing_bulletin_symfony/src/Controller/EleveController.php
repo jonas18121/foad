@@ -8,12 +8,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class EleveController extends AbstractController
 {
@@ -57,7 +56,7 @@ class EleveController extends AbstractController
                             'placeholder' => 'Le prénom de l\'élève'
                         ]
                     ])
-                    ->add('dateNaissanceAt', DateType::class, [
+                    ->add('dateNaissanceAt', BirthdayType::class, [
                         'attr' => [
                             'placeholder' => 'La date de naissance de l\'élève'
                         ]
