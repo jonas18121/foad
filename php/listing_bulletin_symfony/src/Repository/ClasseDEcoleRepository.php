@@ -52,10 +52,10 @@ class ClasseDEcoleRepository extends ServiceEntityRepository
 
     public function calc_classe_sum($numero_classe)
     {
-        $eleve = Eleve::class ;
+        /* $eleve = Eleve::class ;
         $classeDEcole = ClasseDEcole::class;
         $on = Join::ON;
-        /* return $this->getEntityManager()->createQuery(
+        return $this->getEntityManager()->createQuery(
 
             "SELECT SUM(moyenne)/COUNT(eleve.id) AS moyenne_classe 
                 FROM  {$eleve} eleve 
