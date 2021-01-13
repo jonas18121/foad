@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\ClasseDEcole;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Eleve;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method ClasseDEcole|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +49,29 @@ class ClasseDEcoleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function calc_classe_sum($numero_classe)
+    {
+        $eleve = Eleve::class ;
+        $classeDEcole = ClasseDEcole::class;
+        $on = Join::ON;
+        /* return $this->getEntityManager()->createQuery(
+
+            "SELECT SUM(moyenne)/COUNT(eleve.id) AS moyenne_classe 
+                FROM  {$eleve} eleve 
+                INNER JOIN {$classeDEcole} classe_decole 
+                {$on} classe_decole.id = eleve.classe_decole_id 
+                WHERE classe_decole.numero_classe = :numero_classe
+            "
+        ) */
+
+        return $this->createQueryBuilder('c')
+            ->select('SUM(eleve.moyenne)/COUNT(eleve.id) AS moyenne_classe')
+            ->join('c.eleves', 'eleve', Join::WITH, 'c.id = eleve.classeDEcole')
+            ->andWhere('c.numeroClasse IN (:numero_classe)')
+            ->setParameter('numero_classe', $numero_classe)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
 }

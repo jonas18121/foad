@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}voir une classe{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h1>Voir Classe n* {{ classeDEcole.numeroClasse }} </h1>
+
+    <a href="{{ path('eleve_add') }}">Ajouter un élève</a>
+
+    {% if classeDEcole.eleves is not empty %}
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Classe n*</th>
+                    <th>Moyenne</th>
+                    <th>Appréciation</th>
+                    <th>Afficher</th>
+                    <th> Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody class='tbody'>
+
+            <pre>
+                {{ dump(moyenne_classe.0.0.moyenne_classe) }}
+            </pre>
+                
+                 
+                {%  for eleve in classeDEcole.eleves %} 
+                    <tr>
+                        <td>{{ eleve.nom }}</td>
+                        <td>{{ eleve.prenom }}</td>
+                        <td>{{ eleve.dateNaissanceAt | date('d/m/Y H:i') }}</td>
+                        <td>{{ eleve.classeDEcole.numeroClasse }}</td>
+                        <td>{{ eleve.moyenne }}</td>
+                        <td>{{ eleve.appreciation }}</td>
+                        <td><a href="{{ path('eleve_get_one', { 'id' : eleve.id } ) }}">Afficher</a></td>
+                        <td><a href="{{ path('eleve_edit', { 'id' : eleve.id } ) }}">Modifier</a></td>
+                        <td><a href="{{ path('eleve_delete', { 'id' : eleve.id } ) }}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+
+                
+            </tbody>
+            <tfoot>
+                <td colspan="3">nombres d'élèves : {{ classeDEcole.eleves|length }}</td>
+                <td> {{ moyenne_classe.0.0.moyenne_classe }} / 20</td>
+            </tfoot>
+        </table>
+    {% else %}
+        <p>Il n'y a pas d'élèves dans cette classe</p>    
+    {% endif %}    
+</div>
+{% endblock %}

@@ -48,4 +48,19 @@ class ClasseDEcoleController extends AbstractController
             'formEleve' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/classe_d_ecole/{id}", name="classe_get_one", requirements={"id": "\d+"}, methods="GET")
+     */
+    public function get_one_eleve(ClasseDEcole $classeDEcole, ClasseDEcoleRepository $repo)
+    {
+        $moyenne_classe = $repo->calc_classe_sum($classeDEcole->getNumeroClasse());
+
+        return $this->render('classe_d_ecole/get_one_classe.html.twig', [
+            'classeDEcole' => $classeDEcole,
+            'moyenne_classe' => $moyenne_classe
+        ]);
+    }
+
+    
 }

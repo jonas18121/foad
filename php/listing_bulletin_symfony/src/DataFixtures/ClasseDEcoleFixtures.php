@@ -18,7 +18,7 @@ class ClasseDEcoleFixtures extends Fixture
 
             $classe->setMoyenneClasse($i)
                 ->setNbEleves($i)
-                ->setNumeroClass($i)
+                ->setNumeroClasse($i)
             ;
             
             $manager->persist($classe);
