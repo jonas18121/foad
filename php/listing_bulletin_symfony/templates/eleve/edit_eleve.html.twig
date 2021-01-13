@@ -43,6 +43,17 @@
 
             <div class="">
 
+                <label>{{ form_label(formEleve.classeDEcole) }}</label>
+
+                <div>
+                    {{ form_widget(formEleve.classeDEcole, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formEleve.classeDEcole) }} </small>
+            </div>
+
+            <div class="">
+
                 <div class="form-error">
                     {{ form_errors(formEleve.dateNaissanceAt) }}
                 </div>

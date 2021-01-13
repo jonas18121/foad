@@ -1,22 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Gestion des élèves{% endblock %}
 
 {% block body %}
 
 
 <div class="example-wrapper">
-    <h1>Accueil</h1>
+    <h1>Gestion des élèves</h1>
 
-    <h2>Gestion des élèves</h2>
+    <h2>Voir tous les élèves</h2>
         <a href="{{ path('eleve_add') }}">Ajouter un élève</a>
 
+<pre>
+    {{ dump(eleves) }}
+</pre>
         <table class='table'>
             <thead>
                 <tr>
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Date de naissance</th>
+                    <th>Classe n*</th>
                     <th>Moyenne</th>
                     <th>Appréciation</th>
                     <th>Afficher</th>
@@ -30,6 +34,7 @@
                         <td>{{ eleve.nom }}</td>
                         <td>{{ eleve.prenom }}</td>
                         <td>{{ eleve.dateNaissanceAt | date('d/m/Y H:i') }}</td>
+                        <td>{{ eleve.classeDEcole.numeroClasse }}</td>
                         <td>{{ eleve.moyenne }}</td>
                         <td>{{ eleve.appreciation }}</td>
                         <td><a href="{{ path('eleve_get_one', { 'id' : eleve.id } ) }}">Afficher</a></td>

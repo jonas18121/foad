@@ -289,3 +289,8 @@ pour créer un validator installé :
 pour débuger un validator :
 
     - php bin/console debug:validator namespace_de_class
+
+
+## supprimer les caches
+
+    - php bin/console cache:clear

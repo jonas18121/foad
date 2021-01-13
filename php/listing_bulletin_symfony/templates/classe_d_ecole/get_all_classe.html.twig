@@ -8,6 +8,8 @@
 <div class="example-wrapper">
     <h1>Gestion des Classes d'ecole</h1>
 
+    <h2>Voir toutes les classes</h2>
+
         <a href="{{ path('classe_add') }}">Ajouter une classe</a>
 
         <table class='table'>
@@ -27,7 +29,7 @@
                         <td>{{ classe.numeroClasse }}</td>
                         <td>{{ classe.nbEleves }}</td>
                         <td>{{ classe.moyenneClasse }}</td>
-                        {# <td><a href="{{ path('classe_get_one', { 'id' : classe.id } ) }}">Afficher</a></td> #}
+                        <td><a href="{{ path('classe_get_one', { 'id' : classe.id } ) }}">Afficher</a></td>
                         {# <td><a href="{{ path('classe_edit', { 'id' : classe.id } ) }}">Modifier</a></td> #}
                         {# <td><a href="{{ path('classe_delete', { 'id' : classe.id } ) }}">Supprimer</a></td> #}
                     </tr>
