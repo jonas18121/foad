@@ -8,12 +8,12 @@
 <div class="example-wrapper">
     <h1>Gestion des élèves</h1>
 
-    <h2>Voir tous les élèves</h2>
+    <h2>Voir tous les élèves de l'école</h2>
         <a href="{{ path('eleve_add') }}">Ajouter un élève</a>
 
-<pre>
+{# <pre>
     {{ dump(eleves) }}
-</pre>
+</pre> #}
         <table class='table'>
             <thead>
                 <tr>
@@ -44,8 +44,8 @@
                 {% endfor %}
             </tbody>
             <tfoot>
-                <td colspan="3">nombres d'élèves : <?= $count_eleve->get_nb_eleve()  ?></td>
-                <td> <?= $moyenne_classe->get_moyenne_classe() . ' / 20' ?></td>
+                {# <td colspan="3">nombres d'élèves dans l'ecole : <?= $count_eleve->get_nb_eleve()  ?></td>
+                <td> <?= $moyenne_ecole->get_moyenne_ecole() . ' / 20' ?></td> #}
             </tfoot>
         </table>
 </div>

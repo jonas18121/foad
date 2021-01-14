@@ -27,9 +27,9 @@
             </thead>
             <tbody class='tbody'>
 
-            <pre>
+            {# <pre>
                 {{ dump(moyenne_classe.0.0.moyenne_classe) }}
-            </pre>
+            </pre> #}
                 
                  
                 {%  for eleve in classeDEcole.eleves %} 
@@ -50,7 +50,7 @@
             </tbody>
             <tfoot>
                 <td colspan="3">nombres d'élèves : {{ classeDEcole.eleves|length }}</td>
-                <td> {{ moyenne_classe.0.0.moyenne_classe }} / 20</td>
+                <td>Moyenne de cette classe : {{ moyenne_classe.0.0.moyenne_classe }} / 20</td>
             </tfoot>
         </table>
     {% else %}
