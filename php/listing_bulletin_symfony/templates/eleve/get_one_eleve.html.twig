@@ -14,7 +14,7 @@
             <p>moyenne              : {{ eleve.moyenne }} </p>
             <p>appreciation         : {{ eleve.appreciation }} </p>
 
-            <?php if($one_eleve->getMoyenne() != $one_eleve->{'moyenne_eleve'} ) : ?> 
+            {# <?php if($one_eleve->getMoyenne() != $one_eleve->{'moyenne_eleve'} ) : ?> 
                 <form action="" method="post">
                     <div>
                         <div>
@@ -31,7 +31,7 @@
                         <input type="submit" value="Actualiser la moyenne de l'élève">
                     </div>
                 </form>
-            <?php endif; ?>
+            <?php endif; ?> #}
         </div>
     </div>
 {% endblock %}

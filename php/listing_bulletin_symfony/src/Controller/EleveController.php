@@ -84,7 +84,7 @@ class EleveController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="eleve_delete", requirements={"id": "\d+"})
+     * @Route("/eleve/delete/{id}", name="eleve_delete", requirements={"id": "\d+"})
      */
     public function delete_eleve(Eleve $eleve, EntityManagerInterface $manager)
     {
