@@ -13,7 +13,7 @@ class ClasseDEcoleFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        for($i = 1; $i <= 10; $i++){
+        /* for($i = 1; $i <= 10; $i++){
             $classe = new ClasseDEcole;
 
             $classe->setMoyenneClasse($i)
@@ -23,7 +23,7 @@ class ClasseDEcoleFixtures extends Fixture
             
             $manager->persist($classe);
         }
-
+ */
         $manager->flush();
     }
 }

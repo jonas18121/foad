@@ -74,22 +74,22 @@ class ClasseDEcole
         return $this->eleves;
     }
 
-    public function addElefe(Eleve $elefe): self
+    public function addEleve(Eleve $eleve): self
     {
-        if (!$this->eleves->contains($elefe)) {
-            $this->eleves[] = $elefe;
-            $elefe->setClasseDEcole($this);
+        if (!$this->eleves->contains($eleve)) {
+            $this->eleves[] = $eleve;
+            $eleve->setClasseDEcole($this);
         }
 
         return $this;
     }
 
-    public function removeElefe(Eleve $elefe): self
+    public function removeEleve(Eleve $eleve): self
     {
-        if ($this->eleves->removeElement($elefe)) {
+        if ($this->eleves->removeElement($eleve)) {
             // set the owning side to null (unless already changed)
-            if ($elefe->getClasseDEcole() === $this) {
-                $elefe->setClasseDEcole(null);
+            if ($eleve->getClasseDEcole() === $this) {
+                $eleve->setClasseDEcole(null);
             }
         }
 

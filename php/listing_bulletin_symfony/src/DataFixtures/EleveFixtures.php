@@ -14,7 +14,7 @@ class EleveFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        for($i = 1; $i <= 10; $i++){
+        /* for($i = 1; $i <= 10; $i++){
             $eleve = new Eleve();
 
             $eleve->setNom("Nom n° {$i} ")
@@ -25,7 +25,7 @@ class EleveFixtures extends Fixture
             ;
             
             $manager->persist($eleve);
-        }
+        } */
 
         $manager->flush();
     }

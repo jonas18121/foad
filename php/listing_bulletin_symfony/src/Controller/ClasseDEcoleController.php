@@ -52,7 +52,7 @@ class ClasseDEcoleController extends AbstractController
     /**
      * @Route("/classe_d_ecole/{id}", name="classe_get_one", requirements={"id": "\d+"}, methods="GET")
      */
-    public function get_one_eleve(ClasseDEcole $classeDEcole, ClasseDEcoleRepository $repo)
+    public function get_one_classe(ClasseDEcole $classeDEcole, ClasseDEcoleRepository $repo)
     {
         $moyenne_classe = $repo->calc_classe_sum($classeDEcole->getNumeroClasse());
 
@@ -63,9 +63,9 @@ class ClasseDEcoleController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="classe_delete", requirements={"id": "\d+"})
+     * @Route("/classe_d_ecole/delete/{id}", name="classe_delete", requirements={"id": "\d+"})
      */
-    public function delete_eleve(ClasseDEcole $classeDEcole, EntityManagerInterface $manager)
+    public function delete_classe(ClasseDEcole $classeDEcole, EntityManagerInterface $manager)
     {
         $manager->remove($classeDEcole);
         $manager->flush();
