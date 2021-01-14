@@ -16,7 +16,7 @@ class ClasseDEcoleController extends AbstractController
     /**
      * @Route("/classe_d_ecole", name="classe_all")
      */
-    public function index(ClasseDEcoleRepository $repo): Response
+    public function get_all_classe(ClasseDEcoleRepository $repo): Response
     {
         $classes = $repo->findAll();
 
@@ -41,11 +41,11 @@ class ClasseDEcoleController extends AbstractController
             $manager->persist($classe);
             $manager->flush();
 
-            return $this->redirectToRoute('classe');
+            return $this->redirectToRoute('classe_all');
         }
 
         return $this->render('classe_d_ecole/create_classe.html.twig', [
-            'formEleve' => $form->createView()
+            'formClasse' => $form->createView()
         ]);
     }
 
@@ -60,6 +60,17 @@ class ClasseDEcoleController extends AbstractController
             'classeDEcole' => $classeDEcole,
             'moyenne_classe' => $moyenne_classe
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="classe_delete", requirements={"id": "\d+"})
+     */
+    public function delete_eleve(ClasseDEcole $classeDEcole, EntityManagerInterface $manager)
+    {
+        $manager->remove($classeDEcole);
+        $manager->flush();
+
+        return $this->redirectToRoute('classe_all');
     }
 
     

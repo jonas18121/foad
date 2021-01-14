@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une classe d' école{% endblock %}
+
+{% form_theme formClasse 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <div id="container">
+        <h1>Ajouter une classe d' école</h1>
+
+        {{ form_start(formClasse) }}
+
+            <div class="">
+            
+                {# <div class="form-error">
+                    {{ form_errors(formClasse.nom) }}
+                </div> #}
+
+                <label>{{ form_label(formClasse.numeroClasse) }}</label>
+
+                <div>
+                    {{ form_widget(formClasse.numeroClasse, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formClasse.numeroClasse) }} </small>
+            </div>
+
+
+            <div class="">
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(formClasse) }}
+    </div>
+
+
+{% endblock %}
