@@ -18,7 +18,8 @@ class EleveController extends AbstractController
      */
     public function index(EleveRepository $repo): Response
     {
-        $eleves = $repo->findAll();
+        // $eleves = $repo->findAll();
+        $eleves = $repo->find_all_eleve_in_ecole();
         
         return $this->render('eleve/get_all_eleves.html.twig', [
             'eleves' => $eleves
