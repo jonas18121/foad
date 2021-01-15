@@ -72,4 +72,16 @@ class EleveRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
+
+    public function find_one($id)
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e, c')
+            ->leftJoin('e.classeDEcole', 'c')
+            ->andWhere('e.id IN (:id)')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
 }

@@ -294,3 +294,47 @@ pour débuger un validator :
 ## supprimer les caches
 
     - php bin/console cache:clear
+
+
+## Securité ( authentification user )
+
+installer le bundle symfony/security-bundle
+
+    - composer require symfony/security-bundle
+
+Créer une classe User
+
+    - php bin/console make:user
+
+    The name of the security user class (e.g. User) [User]:
+    > User
+
+    Do you want to store user data in the database (via Doctrine)? (yes/no) [yes]:
+    > yes
+
+    Enter a property name that will be the unique "display" name for the user (e.g.
+    email, username, uuid [email]
+    > email
+
+    Does this app need to hash/check user passwords? (yes/no) [yes]:
+    > yes
+
+    created: src/Entity/User.php
+    created: src/Repository/UserRepository.php
+    updated: src/Entity/User.php
+    updated: config/packages/security.yaml
+
+
+Si on veut rajouter des champs dans src/Entity/User 
+
+    - php bin/console make:entity User
+
+puis faire la migration 
+    
+    - php bin/console make:migration
+
+    - php bin/console doctrine:migrations:migrate
+
+puis créer le controlleur SecurityController
+
+    - php bin/console make:controller SecurityController

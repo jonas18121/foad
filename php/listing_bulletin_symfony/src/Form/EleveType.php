@@ -6,9 +6,9 @@ use App\Entity\Eleve;
 use App\Entity\ClasseDEcole;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -24,7 +24,7 @@ class EleveType extends AbstractType
                     'placeholder' => 'Le nom de l\'élève'
                 ]
             ])
-            ->add('prenom', TextType::class, [
+             ->add('prenom', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Le prénom de l\'élève'
                 ]
@@ -50,7 +50,7 @@ class EleveType extends AbstractType
                 'multiple' => false,
                 'label' => 'Choix de la classe de l\'élève',
                 'required' => true,
-            ])
+            ]) 
         ;
     }
 
