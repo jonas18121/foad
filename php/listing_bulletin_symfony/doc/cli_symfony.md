@@ -298,11 +298,14 @@ pour débuger un validator :
 
 ## Securité ( authentification user )
 
+https://symfony.com/doc/4.4/security.html
+
 installer le bundle symfony/security-bundle
 
     - composer require symfony/security-bundle
 
-Créer une classe User
+
+### Créer une classe User
 
     - php bin/console make:user
 
@@ -335,6 +338,28 @@ puis faire la migration
 
     - php bin/console doctrine:migrations:migrate
 
-puis créer le controlleur SecurityController
 
-    - php bin/console make:controller SecurityController
+### créer un formulaire de connexion 
+
+puis créer un formulaire de connexion https://symfony.com/doc/4.4/security/form_login_setup.html
+
+    - php bin/console make:auth
+
+    What style of authentication do you want? [Empty authenticator]:
+        [0] Empty authenticator
+        [1] Login form authenticator
+    > 1
+
+    The class name of the authenticator to create (e.g.AppCustomAuthenticator):
+    > LoginFormAuthenticator
+
+    Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
+    > SecurityController
+
+    Do you want to generate a '/logout' URL? (yes/no) [yes]:
+    > yes
+
+    created: src/Security/LoginFormAuthenticator.php
+    updated: config/packages/security.yaml
+    created: src/Controller/SecurityController.php
+    created: templates/security/login.html.twig

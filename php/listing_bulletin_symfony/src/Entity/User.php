@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -34,7 +35,10 @@ class User implements UserInterface
      */
     private $password;
 
-    private $confrim_password;
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Les 2 mots de passe doîvent être identiques")
+     */
+    private $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -127,5 +131,28 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    
+
+    /**
+     * Get the hashed confirm_password
+     *
+     * @return  string
+     */ 
+    public function getConfirmPassword()
+    {
+        return $this->confirm_password;
+    }
+
+    /**
+     * Set the hashed confirm_password
+     *
+     * @param  string  $confirmPassword  The hashed confirm_password
+     *
+     * @return  self
+     */ 
+    public function setConfirmPassword(string $confirm_password)
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
 }
