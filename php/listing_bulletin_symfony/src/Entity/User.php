@@ -4,11 +4,17 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * 
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message="L'email que vous avez indiqué est déjà utilisé !"
+ * )
  */
 class User implements UserInterface
 {
@@ -21,6 +27,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -32,6 +39,12 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=8, 
+     *      max=255,
+     *      minMessage="Votre mot de passe doit comporter au minimum 8 caractères"
+     * )
      */
     private $password;
 
@@ -42,6 +55,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *  min = 4, 
+     *  minMessage = "Votre pseudo doit comporter au minimum 4 caractères",
+     * )
      */
     private $username;
 
