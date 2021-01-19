@@ -60,4 +60,37 @@ class ProductController extends AbstractController
             'formProduct' => $form->createView()
         ]);
     } 
+
+    /**
+     * @Route("/product/edit/{id}", name="product_edit", requirements={"id": "\d+"}, methods={"GET", "PUT"})
+     */
+    public function edit_eleve(Product $product, Request $request, EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ProductType::class, $product, [ 'method' => 'PUT' ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $manager->persist($product);
+            $manager->flush();
+
+            return $this->redirectToRoute('product_all');
+        }
+
+        return $this->render('product/edit_product.html.twig', [
+            'formProduct' => $form->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/product/delete/{id}", name="product_delete", requirements={"id": "\d+"})
+     */
+    public function delete_eleve(Product $product, EntityManagerInterface $manager)
+    {
+        $manager->remove($product);
+        $manager->flush();
+
+        return $this->redirectToRoute('product');
+    }
 }
