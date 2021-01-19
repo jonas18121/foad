@@ -24,6 +24,10 @@
                     <p>Prix de fin : {{ product.priceEnd }}</p>
                 {% endif %}
             </div>
+
+            <div>
+                <p><a href="{{ path('product_delete', { 'id' : product.id } ) }}">Supprimer</a></p>
+            </div>
         </article>
     </section>
     

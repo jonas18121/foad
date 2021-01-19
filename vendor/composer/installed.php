@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '66c889bf5c2e757aecfe88fcf3ecb061dd7359df',
+    'reference' => 'fc166405d62f86704d3bab9e39dd7b86e4329d02',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,25 @@
       'aliases' => 
       array (
       ),
-      'reference' => '66c889bf5c2e757aecfe88fcf3ecb061dd7359df',
+      'reference' => 'fc166405d62f86704d3bab9e39dd7b86e4329d02',
+    ),
+    'doctrine/annotations' => 
+    array (
+      'pretty_version' => '1.11.1',
+      'version' => '1.11.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ce77a7ba1770462cd705a91a151b6c3746f9c6ad',
+    ),
+    'doctrine/lexer' => 
+    array (
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e864bbf5904cb8f5bb334f99209b48018522f042',
     ),
     'psr/cache' => 
     array (
@@ -90,6 +108,15 @@
       array (
         0 => '1.0',
       ),
+    ),
+    'sensio/framework-extra-bundle' => 
+    array (
+      'pretty_version' => 'v5.6.1',
+      'version' => '5.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '430d14c01836b77c28092883d195a43ce413ee32',
     ),
     'symfony/cache' => 
     array (
