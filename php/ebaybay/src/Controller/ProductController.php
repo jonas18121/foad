@@ -91,6 +91,6 @@ class ProductController extends AbstractController
         $manager->remove($product);
         $manager->flush();
 
-        return $this->redirectToRoute('product');
+        return $this->redirectToRoute('product_all');
     }
 }

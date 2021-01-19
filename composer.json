@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "symfony/profiler-pack": "^1.0"
+    },
+    "require": {
+        "sensio/framework-extra-bundle": "^5.6"
     }
 }
