@@ -72,7 +72,7 @@ La toolbar, la barre d'outils qui contient les bundles
 
 `symfony/var-dumper: *`
 
-    - composer require symfony/debug-pack
+    - composer require symfony/debug-pack --dev
 
 ## installer le moteur de templating Twig
 
@@ -178,9 +178,13 @@ La liste de commande doctrine :
     doctrine:schema:validate
 
 puis dans le fichier `.env` on modifie la variable d'environnement DATABASE_URL
+
 (`DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"`) , 
+
 qui va renseigner à Symfony oû ce trouve notre base de données
+
 `Il faudra modifier le : db_user, db_password, db_name`
+
 voici ma bdd : `DATABASE_URL="mysql://root:@127.0.0.1:3306/listing_bulletin_symfony?serverVersion=5.7"`
 
 Après avoir modifier la variable d'environnement DATABASE_URL, on dit a Symfony de créer la base de données
@@ -219,7 +223,7 @@ répondre `yes` à la question pour mettre a jour la base de données
 Les fixtures vont servir à avoir un jeux de fausses données
 on installe le composant doctrine/doctrine-fixtures-bundle
 
-    - composer require doctrine/doctrine-fixtures-bundle
+    - composer require doctrine/doctrine-fixtures-bundle --dev
 
 puis on créer une fixture
 
