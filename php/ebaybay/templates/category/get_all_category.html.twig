@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les Catégories{% endblock %}
+
+{% block body %}
+    <section>
+            <article>
+
+                <div>
+                    {% for category in categories %}
+                        <ul>
+
+                            <a href="{{ path('category_one', { 'id' : category.id } ) }}">
+                                <li>{{ category.name }}</li>
+                                <li>{{ category.createdAt | date('d/m/Y H:i') }}</li>
+                                {# <li>{{ product.priceStart }}</li>
+                                <li>{{ product.priceEnd }}</li>
+                                <li>{{ product.priceImmediate }}</li> #}
+                            </a>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </article>
+        </section>
+{% endblock %}
