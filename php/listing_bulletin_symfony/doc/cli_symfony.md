@@ -225,6 +225,10 @@ on installe le composant doctrine/doctrine-fixtures-bundle
 
     - composer require doctrine/doctrine-fixtures-bundle --dev
 
+ou
+
+    - composer require orm-fixtures --dev
+
 puis on créer une fixture
 
     - php bin/console make:fixtures

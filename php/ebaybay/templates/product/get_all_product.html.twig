@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les produits{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Date de publication</th>
+                <th scope="col">Prix de départ</th>
+                <th scope="col">Prix de fin</th>
+                <th scope="col">Prix immédiat</th>
+                <th scope="col">Créature de l'annonce</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Nom de la photo</th>
+                </tr>
+        </thead>
+        <tbody>
+
+            {% for product in products %}
+                <tr>
+                    <th>{{ product.title }}</th>
+                    <td>{{ product.content }}</td>
+                    <td>{{ product.createdAt | date('d/m/Y H:i') }}</td>
+                    <td>{{ product.priceStart }}</td>
+                    <td>{{ product.priceEnd }}</td>
+                    <td>{{ product.priceImmediate }}</td>
+                    {# <td>{{ product.user.lastName }}</td> #}
+                    {# <td>{{ product.category }}</td> #}
+                    {# <td>{{ product.photo }}</td> #}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <section>
+        <article>
+            <div>
+                <img src= "asset()" >
+                {# {{ product.photo }} #}
+            </div>
+
+            <div>
+                {% for product in products %}
+                    <ul>
+
+                        <a href="{{ path('product_one', { 'id' : product.id } ) }}">
+                            <li>{{ product.title }}</li>
+                            <li>{{ product.createdAt | date('d/m/Y H:i') }}</li>
+                            <li>{{ product.priceStart }}</li>
+                            <li>{{ product.priceEnd }}</li>
+                            <li>{{ product.priceImmediate }}</li>
+                        </a>
+                    </ul>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+
+{% endblock %}
