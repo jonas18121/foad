@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}produit{% endblock %}
+
+{% block body %}
+
+    <section>
+        <article>
+            <div>
+                <img src= "asset()" >
+                {# {{ product.photo }} #}
+            </div>
+
+            <div>
+                <p>Titre :{{ product.title }}</p>
+                <p>Date de publication : {{ product.createdAt | date('d/m/Y H:i') }}</p>
+                <p>Prix fixe immédiat : {{ product.priceImmediate }}</p>
+
+                {% if product.priceStart is not null %}
+                    <p>Prix de départ : {{ product.priceStart }}</p>
+                {% endif %}
+
+                {% if product.priceStart is not null %}
+                    <p>Prix de fin : {{ product.priceEnd }}</p>
+                {% endif %}
+            </div>
+        </article>
+    </section>
+    
+
+{% endblock %}

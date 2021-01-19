@@ -25,12 +25,27 @@ class Product
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255, nullable=true)
      */
-    private $price;
+    private $priceImmediate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $priceStart;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $priceEnd;
 
     public function getId(): ?int
     {
@@ -49,26 +64,62 @@ class Product
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getContent(): ?string
     {
-        return $this->description;
+        return $this->content;
     }
 
-    public function setDescription(string $description): self
+    public function setContent(string $content): self
     {
-        $this->description = $description;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPriceImmediate(): ?string
     {
-        return $this->price;
+        return $this->priceImmediate;
     }
 
-    public function setPrice(string $price): self
+    public function setPriceImmediate(string $priceImmediate): self
     {
-        $this->price = $price;
+        $this->priceImmediate = $priceImmediate;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPriceStart(): ?int
+    {
+        return $this->priceStart;
+    }
+
+    public function setPriceStart(?int $priceStart): self
+    {
+        $this->priceStart = $priceStart;
+
+        return $this;
+    }
+
+    public function getPriceEnd(): ?int
+    {
+        return $this->priceEnd;
+    }
+
+    public function setPriceEnd(?int $priceEnd): self
+    {
+        $this->priceEnd = $priceEnd;
 
         return $this;
     }
