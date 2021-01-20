@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Catégories : {{ category.name }}{% endblock %}
+
+{% block body %}
+
+    <section>
+    
+        <h1>{{ category.name }}</h1>
+                        
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Contenu</th>
+                    <th scope="col">Date de publication</th>
+                    <th scope="col">Prix de départ</th>
+                    <th scope="col">Prix de fin</th>
+                    <th scope="col">Prix immédiat</th>
+                    <th scope="col">Créature de l'annonce</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Nom de la photo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for product in category.products %}
+                <pre>
+                    {{ dump(product) }}
+                </pre>
+                    <tr>
+                        <th>{{ product.title }}</th>
+                        <td>{{ product.content }}</td>
+                        <td>{{ product.createdAt | date('d/m/Y H:i') }}</td>
+                        <td>{{ product.priceStart }}</td>
+                        <td>{{ product.priceEnd }}</td>
+                        <td>{{ product.priceImmediate }}</td>
+                        {# <td>{{ product.user.lastName }}</td> #}
+                        <td>{{ product.categorie.name }}</td>
+                        {# <td>{{ product.photo }}</td> #}
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="{{ path('product_edit', { 'id' : product.id } ) }}">Modifier</a>
+                            <a href="{{ path('product_delete', { 'id' : product.id } ) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

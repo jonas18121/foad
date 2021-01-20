@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une annonce{% endblock %}
+
+
+{% block body %}
+
+    <div id="container">
+        <h1>Modifier une categorie</h1>
+
+        {{ form_start(formCategory) }}
+
+            <div class="">
+            
+                <div class="form-error">
+                    {{ form_errors(formCategory.name) }}
+                </div> 
+
+                <label>nom de catégorie</label>
+
+                <div>
+                    {{ form_widget(formCategory.name, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formCategory.name) }} </small>
+            </div>
+
+            <div class="">
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(formCategory) }}
+    </div>
+{% endblock %}

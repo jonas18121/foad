@@ -64,7 +64,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/edit/{id}", name="product_edit", requirements={"id": "\d+"}, methods={"GET", "PUT"})
      */
-    public function edit_eleve(Product $product, Request $request, EntityManagerInterface $manager)
+    public function edit_product(Product $product, Request $request, EntityManagerInterface $manager)
     {
         $form = $this->createForm(ProductType::class, $product, [ 'method' => 'PUT' ]);
 
@@ -86,7 +86,7 @@ class ProductController extends AbstractController
      /**
      * @Route("/product/delete/{id}", name="product_delete", requirements={"id": "\d+"})
      */
-    public function delete_eleve(Product $product, EntityManagerInterface $manager)
+    public function delete_product(Product $product, EntityManagerInterface $manager)
     {
         $manager->remove($product);
         $manager->flush();

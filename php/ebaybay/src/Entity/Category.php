@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,7 +27,17 @@ class Category
     /**
      * @ORM\Column(type="datetime")
      */
-    private $creatAt;
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="categorie", orphanRemoval=true)
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,14 +56,44 @@ class Category
         return $this;
     }
 
-    public function getCreatAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->creatAt;
+        return $this->createdAt;
     }
 
-    public function setCreatAt(\DateTimeInterface $creatAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->creatAt = $creatAt;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getCategorie() === $this) {
+                $product->setCategorie(null);
+            }
+        }
 
         return $this;
     }
