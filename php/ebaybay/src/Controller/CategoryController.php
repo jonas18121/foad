@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/product/add", name="category_add", methods={"GET", "POST"})
+     * @Route("/category/add", name="category_add", methods={"GET", "POST"})
      */
     public function create_category(Request $request, EntityManagerInterface $manager)
     {
@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
     } 
 
     /**
-     * @Route("/product/edit/{id}", name="category_edit", requirements={"id": "\d+"}, methods={"GET", "PUT"})
+     * @Route("/category/edit/{id}", name="category_edit", requirements={"id": "\d+"}, methods={"GET", "PUT"})
      */
     public function edit_category(Category $category, Request $request, EntityManagerInterface $manager)
     {
