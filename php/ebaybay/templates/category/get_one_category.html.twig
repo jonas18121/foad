@@ -49,5 +49,33 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <article>
+            
+
+            <div>
+                {% for product in category.products %}
+
+                    <div>
+                        <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" >
+                        {# {{ product.photo }} #}
+                    </div>
+
+                    <ul>
+
+                        <a href="{{ path('product_one', { 'id' : product.id } ) }}">
+                            <div>
+                                <img src= "{{ asset('/images/products/' ~ product.image.name) }}" alt="" >
+                            </div>
+                            <li>{{ product.title }}</li>
+                            <li>{{ product.createdAt | date('d/m/Y H:i') }}</li>
+                            <li>{{ product.priceStart }}</li>
+                            <li>{{ product.priceEnd }}</li>
+                            <li>{{ product.priceImmediate }}</li>
+                        </a>
+                    </ul>
+                {% endfor %}
+            </div>
+        </article>
     </section>
 {% endblock %}
