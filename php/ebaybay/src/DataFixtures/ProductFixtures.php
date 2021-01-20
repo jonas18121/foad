@@ -13,7 +13,7 @@ class ProductFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        for ($i = 1; $i <= 10 ; $i++) { 
+        /* for ($i = 1; $i <= 10 ; $i++) { 
             $product = new Product();
 
             $product->setTitle("Titre n° {$i}")
@@ -24,7 +24,7 @@ class ProductFixtures extends Fixture
 
             $manager->persist($product);
         }
-
+ */
         $manager->flush();
     }
 }

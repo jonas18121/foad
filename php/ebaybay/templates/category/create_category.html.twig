@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une annonce{% endblock %}
+
+
+{% block body %}
+
+    <div id="container">
+        <h1>Ajouter une categorie</h1>
+
+        {{ form_start(formCategory) }}
+
+            <div class="">
+            
+                <div class="form-error">
+                    {{ form_errors(formCategory.name) }}
+                </div> 
+
+                <label>nom de catégorie</label>
+
+                <div>
+                    {{ form_widget(formCategory.name, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formCategory.name) }} </small>
+            </div>
+
+           {#  <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formCategory.content) }}
+                </div> 
+
+                <label>Contenu</label>
+
+                <div>
+                    {{ form_widget(formCategory.content, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formCategory.content) }} </small>
+            </div>
+
+            <div class="">
+
+                <label>{{ form_label(formCategory.priceStart) }}</label>
+
+                <div>
+                    {{ form_widget(formCategory.priceStart, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formCategory.priceStart) }} </small>
+            </div>
+
+            <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formCategory.priceEnd) }}
+                </div>
+
+                <label>Prix de fin</label>
+
+                <div>
+                    {{ form_widget(formProduct.priceEnd, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.priceEnd) }} </small>
+            </div>
+
+            <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formProduct.priceImmediate) }}
+                </div>
+
+                <label>Prix fixe immédiat</label>
+
+                <div>
+                    {{ form_widget(formProduct.priceImmediate, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.priceImmediate) }} </small>
+            </div>
+ #}
+            {# <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formProduct.appreciation) }}
+                </div>
+
+                <label>Appréciation</label>
+                
+                <div>
+                    {{ form_widget(formProduct.appreciation, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.appreciation) }} </small>
+            </div> #}
+
+            <div class="">
+                <button type="submit">Enregistrer</button>
+            </div>
+
+        {{ form_end(formCategory) }}
+    </div>
+{% endblock %}
