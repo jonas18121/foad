@@ -29,7 +29,7 @@
                     <td>{{ product.priceEnd }}</td>
                     <td>{{ product.priceImmediate }}</td>
                     {# <td>{{ product.user.lastName }}</td> #}
-                    {# <td>{{ product.category }}</td> #}
+                    <td>{{ product.categorie.name }}</td>
                     {# <td>{{ product.photo }}</td> #}
                 </tr>
             {% endfor %}
@@ -48,6 +48,9 @@
                     <ul>
 
                         <a href="{{ path('product_one', { 'id' : product.id } ) }}">
+                            <div>
+                                <img src= "{{ asset('/images/products/' ~ product.image.name) }}" alt="" >
+                            </div>
                             <li>{{ product.title }}</li>
                             <li>{{ product.createdAt | date('d/m/Y H:i') }}</li>
                             <li>{{ product.priceStart }}</li>
