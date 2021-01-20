@@ -7,7 +7,10 @@
     <section>
         <article>
             <div>
-                <img src= "asset()" >
+                <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
+                <pre>
+                    {{ dump(product.image.name) }}
+                </pre>
                 {# {{ product.photo }} #}
             </div>
 

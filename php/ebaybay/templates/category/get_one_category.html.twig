@@ -27,9 +27,7 @@
             <tbody>
 
                 {% for product in category.products %}
-                <pre>
-                    {{ dump(product) }}
-                </pre>
+
                     <tr>
                         <th>{{ product.title }}</th>
                         <td>{{ product.content }}</td>

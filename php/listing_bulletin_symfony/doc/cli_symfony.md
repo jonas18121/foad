@@ -371,3 +371,20 @@ puis créer un formulaire de connexion https://symfony.com/doc/4.4/security/form
     updated: config/packages/security.yaml
     created: src/Controller/SecurityController.php
     created: templates/security/login.html.twig
+
+## Upload un fichier (dont une image, Upload image)
+
+on installe VichUploaderBundle 
+https://github.com/dustin10/VichUploaderBundle/blob/master/docs/installation.md
+
+    - composer require vich/uploader-bundle
+
+puis on choissie avec quel base de donnés ( orm ou mongodb ou phpcr ) on veut agir dans un fichier config/packages/vich_uploader.yaml ou app/config/config.yml
+
+    vich_uploader:
+        db_driver: orm 
+
+
+    inject_on_load: false
+    delete_on_update: true
+    delete_on_remove: true

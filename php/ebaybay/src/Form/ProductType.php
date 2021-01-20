@@ -3,13 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
@@ -47,6 +51,35 @@ class ProductType extends AbstractType
                     'placeholder' => 'Prix fixe immediat'
                 ]
             ])
+            ->add('categorie', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'label' => 'Choisissez une catégorie',
+                'required' => true,
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                // 'imagine_pattern' => '...',
+                'asset_helper' => true,
+                /* 'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ] */
+
+            ]);
+        
         ;
     }
 
