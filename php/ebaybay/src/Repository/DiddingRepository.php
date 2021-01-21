@@ -47,4 +47,20 @@ class DiddingRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * afficher tous les enchères 
+     * avec le produit qui est lier à chaque enchère
+     * et le vendeur du produit qui a activer l'enchère
+     */
+    public function find_all_didding()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d, p, u')
+            ->leftJoin('d.product', 'p')
+            ->leftJoin('p.user', 'u')
+            ->getQuery()
+            ->getResult();
+        ;
+    }
 }

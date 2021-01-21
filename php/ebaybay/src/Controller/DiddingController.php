@@ -17,7 +17,8 @@ class DiddingController extends AbstractController
      */
     public function get_all_didding(DiddingRepository $repo): Response
     {
-        $diddings = $repo->findAll();
+        // $diddings = $repo->findAll();
+        $diddings = $repo->find_all_didding();
 
         return $this->render('didding/get_all_didding.html.twig', [
             'diddings' => $diddings
