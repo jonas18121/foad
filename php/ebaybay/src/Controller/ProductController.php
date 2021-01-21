@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="product_all")
+     * @Route("/", name="product_all")
      */
     public function get_all_product(ProductRepository $repo): Response
     {
