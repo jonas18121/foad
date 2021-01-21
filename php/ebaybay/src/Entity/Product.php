@@ -74,6 +74,14 @@ class Product
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+
+
     public function __construct()
     {
         $this->image = new EmbeddedFile();
@@ -201,6 +209,18 @@ class Product
     public function setCategorie(?Category $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
