@@ -6,7 +6,7 @@
 {% block body %}
 
     <div id="container">
-        <h1>Ajouter une annonce</h1>
+        <h1>Modifier une annonce</h1>
 
         {{ form_start(formProduct) }}
 
@@ -40,7 +40,7 @@
                 <small> {{ form_help(formProduct.content) }} </small>
             </div>
 
-            <div class="">
+            {# <div class="">
 
                 <label>{{ form_label(formProduct.priceStart) }}</label>
 
@@ -64,21 +64,21 @@
                 </div>
                 
                 <small> {{ form_help(formProduct.priceEnd) }} </small>
-            </div>
+            </div> #}
 
             <div class="">
 
                 <div class="form-error">
-                    {{ form_errors(formProduct.priceImmediate) }}
+                    {{ form_errors(formProduct.priceFixe) }}
                 </div>
 
-                <label>Prix fixe immédiat</label>
+                <label>Prix fixe </label>
 
                 <div>
-                    {{ form_widget(formProduct.priceImmediate, { attr : { class : '' }} ) }}
+                    {{ form_widget(formProduct.priceFixe, { attr : { class : '' }} ) }}
                 </div>
                 
-                <small> {{ form_help(formProduct.priceImmediate) }} </small>
+                <small> {{ form_help(formProduct.priceFixe) }} </small>
             </div>
 
             <div class="">
@@ -98,7 +98,11 @@
 
             <div class="">
 
-                <label>{{ form_label(formProduct.imageFile) }}</label>
+                <div class="form-error">
+                    {{ form_errors(formProduct.imageFile) }}
+                </div>
+
+                <label>Image</label>
                 
                 <div>
                     {{ form_widget(formProduct.imageFile, { attr : { class : '' }} ) }}

@@ -10,6 +10,8 @@
         <thead>
             <tr>
                 <th scope="col">Nom du produit</th>
+                <th scope="col">Date de départ</th>
+                <th scope="col">Date de fin</th>
                 <th scope="col">Prix de départ</th>
                 <th scope="col">Prix vendu</th>
                 <th scope="col">Prix voulu par le vendeur</th>
@@ -25,19 +27,31 @@
             {{ dump(diddings) }}
         </pre>
 
-            {# {% for product in products %}
+            {% for didding in diddings %}
+
+            <pre>
+                {{ dump(didding.product.user.lastName) }}
+            </pre>
                 <tr>
-                    <th>{{ product.title }}</th>
-                    <td>{{ product.content }}</td>
-                    <td>{{ product.createdAt | date('d/m/Y H:i') }}</td>
-                    <td>{{ product.priceStart }}</td>
-                    <td>{{ product.priceEnd }}</td>
-                    <td>{{ product.priceImmediate }}</td>
-                    {# <td>{{ product.user.lastName }}</td> # }
-                    <td>{{ product.categorie.name }}</td>
-                    {# <td>{{ product.photo }}</td> 
+                    <th>{{ didding.product.title }}</th>
+                    <td>{{ didding.dateStartAt | date('d/m/Y H:i') }}</td>
+                    <td>{{ didding.dateEndAt | date('d/m/Y H:i') }}</td>
+                    <td>{{ didding.priceStart }}</td>
+                    <td>{{ didding.priceEnd }}</td>
+                    <td>{{ didding.priceImmediate }}</td>
+                    <td>{{ didding.product.user.lastName }} {{ didding.product.user.firstName }}</td>
+                    <td>{{ didding.priceShopper }}</td>
+                    <td>{{ didding.shopper }}</td> 
+                    <td>
+                        {% if didding.isActive == true %}
+                            En cours
+                        {% else %}
+                            Terminer
+                        {% endif %}
+                    </td>
+                    {# <td>{{ product.photo }}</td> #}
                 </tr>
-            {% endfor %} #}
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

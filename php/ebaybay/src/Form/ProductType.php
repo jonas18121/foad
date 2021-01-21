@@ -33,7 +33,7 @@ class ProductType extends AbstractType
 
             // ->add('createdAt', DateTimeType::class)
 
-            ->add('priceStart', IntegerType::class, [
+            /* ->add('priceStart', IntegerType::class, [
                 'attr' => [
                     'placeholder' => 'Prix de départ'
                 ],
@@ -44,11 +44,11 @@ class ProductType extends AbstractType
                     'placeholder' => 'Prix de fin'
                 ],
                 'required' => false
-            ])
+            ]) */
             
-            ->add('priceImmediate', IntegerType::class, [
+            ->add('priceFixe', IntegerType::class, [
                 'attr' => [
-                    'placeholder' => 'Prix fixe immediat'
+                    'placeholder' => 'Prix fixe'
                 ]
             ])
             ->add('categorie', EntityType::class, [
