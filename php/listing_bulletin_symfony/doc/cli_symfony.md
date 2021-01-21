@@ -374,6 +374,8 @@ puis créer un formulaire de connexion https://symfony.com/doc/4.4/security/form
     created: src/Controller/SecurityController.php
     created: templates/security/login.html.twig
 
+
+
 ## Upload un fichier (dont une image, Upload image)
 
 on installe VichUploaderBundle 
