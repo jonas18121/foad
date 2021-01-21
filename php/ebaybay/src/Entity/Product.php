@@ -35,22 +35,12 @@ class Product
     /**
      * @ORM\Column(type="integer", length=255, nullable=true)
      */
-    private $priceImmediate;
+    private $priceFixe;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $priceStart;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $priceEnd;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
@@ -79,6 +69,11 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Didding::class, mappedBy="product", cascade={"persist", "remove"})
+     */
+    private $didding;
 
 
 
@@ -153,14 +148,14 @@ class Product
         return $this;
     }
 
-    public function getPriceImmediate(): ?string
+    public function getPriceFixe(): ?string
     {
-        return $this->priceImmediate;
+        return $this->priceFixe;
     }
 
-    public function setPriceImmediate(string $priceImmediate): self
+    public function setPriceFixe(string $priceFixe): self
     {
-        $this->priceImmediate = $priceImmediate;
+        $this->priceFixe = $priceFixe;
 
         return $this;
     }
@@ -173,30 +168,6 @@ class Product
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getPriceStart(): ?int
-    {
-        return $this->priceStart;
-    }
-
-    public function setPriceStart(?int $priceStart): self
-    {
-        $this->priceStart = $priceStart;
-
-        return $this;
-    }
-
-    public function getPriceEnd(): ?int
-    {
-        return $this->priceEnd;
-    }
-
-    public function setPriceEnd(?int $priceEnd): self
-    {
-        $this->priceEnd = $priceEnd;
 
         return $this;
     }
@@ -221,6 +192,23 @@ class Product
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDidding(): ?Didding
+    {
+        return $this->didding;
+    }
+
+    public function setDidding(Didding $didding): self
+    {
+        // set the owning side of the relation if necessary
+        if ($didding->getProduct() !== $this) {
+            $didding->setProduct($this);
+        }
+
+        $this->didding = $didding;
 
         return $this;
     }

@@ -97,6 +97,17 @@
             </div>
 
             <div class="">
+
+                <label>{{ form_label(formProduct.imageFile) }}</label>
+                
+                <div>
+                    {{ form_widget(formProduct.imageFile, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.imageFile) }} </small>
+            </div>
+
+            <div class="">
                 <button type="submit">Enregistrer</button>
             </div>
 

@@ -68,11 +68,17 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Didding::class, mappedBy="shopper")
+     */
+    private $diddings;
+
    
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->diddings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +241,36 @@ class User implements UserInterface
     public function setConfirmPassword($confirm_password)
     {
         $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Didding[]
+     */
+    public function getDiddings(): Collection
+    {
+        return $this->diddings;
+    }
+
+    public function addDidding(Didding $didding): self
+    {
+        if (!$this->diddings->contains($didding)) {
+            $this->diddings[] = $didding;
+            $didding->setShopper($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDidding(Didding $didding): self
+    {
+        if ($this->diddings->removeElement($didding)) {
+            // set the owning side to null (unless already changed)
+            if ($didding->getShopper() === $this) {
+                $didding->setShopper(null);
+            }
+        }
 
         return $this;
     }
