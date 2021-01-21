@@ -290,6 +290,8 @@ Exécutez la commande suivante pour vérifier que le type de formulaire a été 
 
 ## Les validations 
 
+https://symfony.com/doc/4.4/validation.html
+
 pour créer un validator installé :
 
     - composer require symfony/validator doctrine/annotations
