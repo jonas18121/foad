@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Didding;
+use App\Entity\Product;
+use App\Form\DiddingType;
 use App\Repository\DiddingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,36 +30,44 @@ class DiddingController extends AbstractController
     /**
      * @Route("/didding/{id}", name="didding_one", requirements={"id": "\d+"}, methods="GET")
      */
-    public function get_one_product(Didding $didding)
+    public function get_one_didding($id, DiddingRepository $repo)
     {
+        $didding = $repo->find_one_didding($id);
+
         return $this->render('didding/get_one_didding.html.twig', [
             'didding' => $didding
         ]);
     }
 
     /**
-     * @Route("/didding/add", name="didding_add", methods={"GET", "POST"})
+     * @Route("/didding/add/product/{id}", name="didding_add", methods={"GET", "POST"})
      */
-    public function create_didding(Request $request, EntityManagerInterface $manager)
+    public function create_didding(Product $product, Request $request, EntityManagerInterface $manager)
     {
         $didding = new Didding();
 
-        $form = $this->createForm(DiddingType::class, $didding);
+        $didding->setProduct($product);
 
+        
+        $form = $this->createForm(DiddingType::class, $didding);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $didding->setCreatedAt(new \DateTime());
+            $didding->setCreatedAt(new \DateTime())
+                ->setIsActive(true)
+            ;
 
             $manager->persist($didding);
             $manager->flush();
 
             return $this->redirectToRoute('didding_all');
         }
-
+ 
         return $this->render('didding/create_didding.html.twig', [
-            'formDidding' => $form->createView()
+            'formDidding' => $form->createView(),
+            'product' => $product
         ]);
     } 
 

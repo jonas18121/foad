@@ -9,7 +9,7 @@
             <div>
                 <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
                 <pre>
-                    {{ dump(product.image.name) }}
+                    {{ dump(product) }}
                 </pre>
                 {# {{ product.photo }} #}
             </div>
@@ -30,6 +30,7 @@
 
             <div>
                 <p>
+                    <a href="{{ path('didding_add', { 'id' : product.id } ) }}">Mettre au enchère</a>
                     <a href="{{ path('product_edit', { 'id' : product.id } ) }}">Modifier</a>
                     <a href="{{ path('product_delete', { 'id' : product.id } ) }}">Supprimer</a>
                 </p>

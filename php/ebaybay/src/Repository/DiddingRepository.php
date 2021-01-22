@@ -63,4 +63,17 @@ class DiddingRepository extends ServiceEntityRepository
             ->getResult();
         ;
     }
+
+    public function find_one_didding($id)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d, p, u')
+            ->leftJoin('d.product', 'p')
+            ->leftJoin('p.user', 'u')
+            ->andWhere('d.id IN (:id)')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
 }

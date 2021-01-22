@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}enchère{% endblock %}
+
+{% block body %}
+
+<section>
+<pre>
+    {{ dump(didding) }}
+</pre>
+
+    <article>
+        <div>
+                <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
+                <pre>
+                    {{ dump(product.image.name) }}
+                </pre>
+                {# {{ product.photo }} #}
+            </div>
+
+            <div>
+                <p>Titre :{{ product.title }}</p>
+                <p>Date de publication : {{ product.createdAt | date('d/m/Y H:i') }}</p>
+                <p>Prix fixe immédiat : {{ product.priceFixe }}</p>
+            </div>
+    </article>
+
+</section>
+
+{% endblock %}
