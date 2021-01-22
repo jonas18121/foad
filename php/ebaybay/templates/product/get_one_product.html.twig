@@ -7,32 +7,41 @@
     <section>
         <article>
             <div>
-                <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
+                <img src= "{{ asset('/images/products/' ~ product.0.image.name ) }}" alt="" >
                 <pre>
                     {{ dump(product) }}
                 </pre>
                 {# {{ product.photo }} #}
             </div>
 
+            <pre>
+                {# {{ dump(product.0.didding.isActive) }} #}
+            </pre>
+
             <div>
-                <p>Titre :{{ product.title }}</p>
-                <p>Date de publication : {{ product.createdAt | date('d/m/Y H:i') }}</p>
-                <p>Prix fixe immédiat : {{ product.priceFixe }}</p>
+                <p>Titre :{{ product.0.title }}</p>
+                <p>Date de publication : {{ product.0.createdAt | date('d/m/Y H:i') }}</p>
+                <p>Prix fixe immédiat : {{ product.0.priceFixe }}</p>
 
-                {# {% if product.priceStart is not null %}
-                    <p>Prix de départ : {{ product.priceStart }}</p>
-                {% endif %}
-
-                {% if product.priceStart is not null %}
-                    <p>Prix de fin : {{ product.priceEnd }}</p>
-                {% endif %} #}
             </div>
 
             <div>
                 <p>
-                    <a href="{{ path('didding_add', { 'id' : product.id } ) }}">Mettre au enchère</a>
-                    <a href="{{ path('product_edit', { 'id' : product.id } ) }}">Modifier</a>
-                    <a href="{{ path('product_delete', { 'id' : product.id } ) }}">Supprimer</a>
+                    {% if product.0.didding is not null %}
+                    
+                        {% if product.0.didding.isActive != true  %}
+                            <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
+                        {% else %}
+                            Ce produit est actuellement aux enchère <a href="">cliquer ici pour y accéder</a> 
+                        {% endif %}
+                        
+                    {% else %}
+                        <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
+                    {% endif %}
+                    
+                
+                    <a href="{{ path('product_edit', { 'id' : product.0.id } ) }}">Modifier</a>
+                    <a href="{{ path('product_delete', { 'id' : product.0.id } ) }}">Supprimer</a>
                 </p>
             </div>
         </article>

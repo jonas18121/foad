@@ -47,4 +47,24 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * performance 1 requête en 95ms au lieu de 3 en 143ms 
+     * 
+     * affiche un produit en particulier 
+     * puis donne moi accès au user 
+     * et au didding depuis ce produit
+     */
+    public function find_one_product($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p, d, u')
+            ->leftJoin('p.didding', 'd')
+            ->leftJoin('p.user', 'u')
+            ->andWhere('p.id IN (:id)')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
 }
