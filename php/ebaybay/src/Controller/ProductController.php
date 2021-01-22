@@ -29,8 +29,14 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{id}", name="product_one", requirements={"id": "\d+"}, methods="GET")
      */
-    public function get_one_product(Product $product)
+    public function get_one_product($id, ProductRepository $repo)
     {
+
+        $product = $repo->find_one_product($id);
+
+        /* dump($product[0]);
+        dd($product); */
+
         return $this->render('product/get_one_product.html.twig', [
             'product' => $product
         ]);
