@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une enchère{% endblock %}
+
+
+{% block body %}
+
+    <div id="container">
+        <h1>Ajouter ce produit aux enchères</h1>
+
+        <article>
+            <div>
+                <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
+                <pre>
+                    {{ dump(product.image.name) }}
+                </pre>
+            </div>
+
+            <div>
+                <p>Titre :{{ product.title }}</p>
+                <p>Date de publication : {{ product.createdAt | date('d/m/Y H:i') }}</p>
+            </div>
+        </article>
+
+         {{ form_start(formDidding) }}
+
+            <div class="">
+            
+                <div class="form-error">
+                    {{ form_errors(formDidding.priceStart) }}
+                </div> 
+
+                <label>Prix de départ</label>
+
+                <div>
+                    {{ form_widget(formDidding.priceStart, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formDidding.priceStart) }} </small>
+            </div>
+
+            <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formDidding.priceImmediate) }}
+                </div> 
+
+                <label>Prix immédiat</label>
+
+                <div>
+                    {{ form_widget(formDidding.priceImmediate, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formDidding.priceImmediate) }} </small>
+            </div>
+
+             <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formDidding.dateStartAt) }}
+                </div> 
+
+                <label>Date de départ</label>
+
+                <div>
+                    {{ form_widget(formDidding.dateStartAt, { attr : { class : '' }} ) }}
+                </div>
+
+                <small> {{ form_help(formDidding.dateStartAt) }} </small>
+            </div>
+
+            <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formDidding.dateEndAt) }}
+                </div>
+
+                <label>Date de fin</label>
+
+                <div>
+                    {{ form_widget(formDidding.dateEndAt, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formDidding.dateEndAt) }} </small>
+            </div> 
+
+           {# <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formProduct.priceFixe) }}
+                </div>
+
+                <label>Prix fixe </label>
+
+                <div>
+                    {{ form_widget(formProduct.priceFixe, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.priceFixe) }} </small>
+            </div>
+
+            <div class="">
+
+                {# <div class="form-error">
+                    {{ form_errors(formProduct.categorie) }}
+                </div> # }
+
+                <label>{{ form_label(formProduct.categorie) }}</label>
+                
+                <div>
+                    {{ form_widget(formProduct.categorie, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.categorie) }} </small>
+            </div>
+
+            <div class="">
+
+                <div class="form-error">
+                    {{ form_errors(formProduct.imageFile) }}
+                </div>
+
+                <label>Image</label>
+                
+                <div>
+                    {{ form_widget(formProduct.imageFile, { attr : { class : '' }} ) }}
+                </div>
+                
+                <small> {{ form_help(formProduct.imageFile) }} </small>
+            </div>#}
+
+
+            <div class="">
+                <button type="submit">Ajouter aux enchères</button>
+            </div>
+
+        {{ form_end(formDidding) }}
+    </div> 
+
+{% endblock %}

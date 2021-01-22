@@ -49,7 +49,8 @@ class ProductType extends AbstractType
             ->add('priceFixe', IntegerType::class, [
                 'attr' => [
                     'placeholder' => 'Prix fixe'
-                ]
+                ],
+                'required' => false
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Category::class,
