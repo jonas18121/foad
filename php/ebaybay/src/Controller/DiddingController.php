@@ -45,7 +45,7 @@ class DiddingController extends AbstractController
         $error = null;
         $didding = $repo->find_one_didding($id);
         
-        dump($didding[0]);
+        // dd($didding);
         
         $form = $this->createForm(PriceShopperType::class, $didding[0]);
         

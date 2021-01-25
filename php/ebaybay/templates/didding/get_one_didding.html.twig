@@ -32,18 +32,24 @@
                     {% endif %}
                 </p>
                 <p>
-                    Prix le plus élevé est proposer par {{ didding.0.shopper.lastName }} {{ didding.0.shopper.firstName }} :
-                    {% if didding.0.bestPrice is not null %}
-                         {{ didding.0.bestPrice }} €
-                    {% else %}
-                        Soyer le premier à proposez un prix
+                    {% if didding.0.shopper is not null %}
+
+                        Prix le plus élevé est proposer par {{ didding.0.shopper.lastName }} {{ didding.0.shopper.firstName }} :
+
+                        {% if didding.0.bestPrice is not null %}
+                            {{ didding.0.bestPrice }} €
+                        {% else %}
+                            Soyer le premier à proposez un prix
+                        {% endif %}
+
                     {% endif %}
+
                 </p>
             </div>
 
             {% if didding.0.winner == true %}
 
-            <p> L'enchère est terminer et à été remporter par {{ didding.0.shopper.lastName }} {{ didding.0.shopper.firstName }} au prix de {{ didding.0.bestPrice }} € </p>
+                <p> L'enchère est terminer et à été remporter par {{ didding.0.shopper.lastName }} {{ didding.0.shopper.firstName }} au prix de {{ didding.0.bestPrice }} € </p>
             
             {% else %}
 
@@ -78,7 +84,7 @@
 
                     {{ form_end(formPriceShopper) }}
                 </div>
-                
+
             {% endif %}
 
     </article>
