@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Didding;
 use App\Entity\Product;
 use App\Form\DiddingType;
+use App\Form\PriceShopperType;
 use App\Repository\DiddingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DiddingController extends AbstractController
 {
+    private EntityManagerInterface $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/didding", name="didding_all")
      */
@@ -22,22 +30,81 @@ class DiddingController extends AbstractController
         // $diddings = $repo->findAll();
         $diddings = $repo->find_all_didding();
 
+        // dd($diddings);
+
         return $this->render('didding/get_all_didding.html.twig', [
             'diddings' => $diddings
         ]);
     }
 
     /**
-     * @Route("/didding/{id}", name="didding_one", requirements={"id": "\d+"}, methods="GET")
+     * @Route("/didding/{id}", name="didding_one", requirements={"id": "\d+"}, methods={"GET", "POST"})
      */
-    public function get_one_didding($id, DiddingRepository $repo)
+    public function get_one_didding($id, DiddingRepository $repo, Request $request, EntityManagerInterface $manager)
     {
+        $error = null;
         $didding = $repo->find_one_didding($id);
+        
+        dump($didding[0]);
+        
+        $form = $this->createForm(PriceShopperType::class, $didding[0]);
+        
+        
+        $form->handleRequest($request);
+
+        if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
+            $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
+        }
+        else{
+
+            if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
+                $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+            }
+            else{
+    
+                if ($form->isSubmitted() && $form->isValid()) {
+        
+                    $didding[0]->setShopper($this->getUser());
+                    $didding[0]->setBestPrice($didding[0]->getPriceShopper());
+                    $didding[0]->setPriceShopper(null);
+        
+                    $manager->persist($didding[0]);
+                    $manager->flush();
+        
+                    // return $this->redirectToRoute('didding_all');
+                }
+            }
+        }
+
+        dump($error);
+
 
         return $this->render('didding/get_one_didding.html.twig', [
-            'didding' => $didding
+            'didding' => $didding,
+            'formPriceShopper' => $form->createView(),
+            'error' => $error
         ]);
     }
+
+    /* public function priceShopper($didding)
+    {
+
+        $request = $this->get('security.csrf.token_manager');
+        $manager = $this->getDoctrine()->getManager();
+
+
+        $form = $this->createForm(PriceShopperType::class, $didding);
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $manager->persist($didding);
+            $manager->flush();
+
+            // return $this->redirectToRoute('didding_all');
+        }
+    } */
 
     /**
      * @Route("/didding/add/product/{id}", name="didding_add", methods={"GET", "POST"})
