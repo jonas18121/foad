@@ -61,6 +61,16 @@ class DiddingController extends AbstractController
                 $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
             }
             else{
+
+                if ($didding[0]->getPriceImmediate() != null) 
+                {
+                    if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
+                        $didding[0]->setIsActive(false)
+                            ->setWinner(true)
+                            ->setPriceEnd($didding[0]->getBestPrice())
+                        ;
+                    }
+                }
     
                 if ($form->isSubmitted() && $form->isValid()) {
         

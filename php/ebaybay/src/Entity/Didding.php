@@ -73,6 +73,11 @@ class Didding
      */
     private $bestPrice;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $winner;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +211,18 @@ class Didding
     public function setBestPrice(?int $bestPrice): self
     {
         $this->bestPrice = $bestPrice;
+
+        return $this;
+    }
+
+    public function getWinner(): ?bool
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(?bool $winner): self
+    {
+        $this->winner = $winner;
 
         return $this;
     }
