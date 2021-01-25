@@ -9,19 +9,62 @@
     {{ dump(didding) }}
 </pre>
 
+    
+
     <article>
         <div>
-                <img src= "{{ asset('/images/products/' ~ product.image.name ) }}" alt="" >
+                <img src= "{{ asset('/images/products/' ~ didding.0.product.image.name ) }}" alt="" >
                 <pre>
-                    {{ dump(product.image.name) }}
+                    {# {{ dump(didding.0.product.image.name) }} #}
                 </pre>
                 {# {{ product.photo }} #}
             </div>
 
             <div>
-                <p>Titre :{{ product.title }}</p>
-                <p>Date de publication : {{ product.createdAt | date('d/m/Y H:i') }}</p>
-                <p>Prix fixe immédiat : {{ product.priceFixe }}</p>
+                <p>Titre :{{ didding.0.product.title }}</p>
+                <p>Date de publication : {{ didding.0.product.createdAt | date('d/m/Y H:i') }}</p>
+                <p>Date de début de l'enchère : {{ didding.0.dateStartAt | date('d/m/Y H:i') }}</p>
+                <p>Date de fin de l'enchère : {{ didding.0.dateEndAt | date('d/m/Y H:i') }}</p>
+                <p>Prix de départ : {{ didding.0.priceStart }} €</p>
+                <p>
+                    Prix le plus élevé proposer par un acheteur :
+                    {% if didding.0.bestPrice is not null %}
+                         {{ didding.0.bestPrice }} €
+                    {% else %}
+                        Soyer le premier à proposez un prix
+                    {% endif %}
+                </p>
+            </div>
+
+            <div>
+                {% if error is not null %}
+                    {{ error }}
+                {% endif %}
+            </div>
+
+            <div>
+                {{ form_start(formPriceShopper) }}
+
+                <div class="">
+
+                    <div class="form-error">
+                        {{ form_errors(formPriceShopper.priceShopper) }}
+                    </div>
+
+                    <label>Faire une enchère</label>
+
+                    <div>
+                        {{ form_widget(formPriceShopper.priceShopper, { attr : { class : '' }} ) }}
+                    </div>
+                    
+                    <small> {{ form_help(formPriceShopper.priceShopper) }} </small>
+                </div>
+
+                <div class="">
+                    <button type="submit">Miser ce prix</button>
+                </div>
+
+                {{ form_end(formPriceShopper) }}
             </div>
     </article>
 

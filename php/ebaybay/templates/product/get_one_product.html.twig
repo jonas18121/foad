@@ -32,7 +32,7 @@
                         {% if product.0.didding.isActive != true  %}
                             <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
                         {% else %}
-                            Ce produit est actuellement aux enchère <a href="">cliquer ici pour y accéder</a> 
+                            Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product.0.didding.id } ) }}">cliquer ici pour y accéder</a> 
                         {% endif %}
                         
                     {% else %}

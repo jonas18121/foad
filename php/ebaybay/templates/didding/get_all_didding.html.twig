@@ -24,13 +24,13 @@
         <tbody>
 
         <pre>
-            {{ dump(diddings) }}
+            {# {{ dump(diddings) }} #}
         </pre>
 
             {% for didding in diddings %}
 
             <pre>
-                {{ dump(didding.product.user.lastName) }}
+                {{ dump(didding) }}
             </pre>
                 <tr>
                     <th>{{ didding.product.title }}</th>
@@ -40,8 +40,15 @@
                     <td>{{ didding.priceEnd }}</td>
                     <td>{{ didding.priceImmediate }}</td>
                     <td>{{ didding.product.user.lastName }} {{ didding.product.user.firstName }}</td>
-                    <td>{{ didding.priceShopper }}</td>
-                    <td>{{ didding.shopper }}</td> 
+                    <td>{{ didding.bestPrice }}</td>
+                    <td>
+                        {% if didding.shopper is not null %}
+                            {{ didding.shopper.lastName }}
+                            {{ didding.shopper.firstName }}
+                        {% else %}
+                            Pas d'acheteur
+                        {% endif %}
+                    </td> 
                     <td>
                         {% if didding.isActive == true %}
                             En cours

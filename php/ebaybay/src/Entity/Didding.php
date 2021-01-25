@@ -68,6 +68,11 @@ class Didding
      */
     private $shopper;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $bestPrice;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +194,18 @@ class Didding
     public function setShopper(?User $shopper): self
     {
         $this->shopper = $shopper;
+
+        return $this;
+    }
+
+    public function getBestPrice(): ?int
+    {
+        return $this->bestPrice;
+    }
+
+    public function setBestPrice(?int $bestPrice): self
+    {
+        $this->bestPrice = $bestPrice;
 
         return $this;
     }
