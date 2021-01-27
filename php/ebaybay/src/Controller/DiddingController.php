@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Form\DiddingType;
 use App\Form\PriceShopperType;
 use App\Repository\DiddingRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,47 +45,74 @@ class DiddingController extends AbstractController
     {
         $error = null;
         $didding = $repo->find_one_didding($id);
+
+        $dateCurrent = new DateTime();
         
-        // dd($didding);
-        
+        // dd($didding[0]->getDateEndAt()->format('d/m/Y'));
+
         $form = $this->createForm(PriceShopperType::class, $didding[0]);
         
-        
-        $form->handleRequest($request);
+        // a mettre dans un subscriber ou un service
+        if($dateCurrent->format('d/m/Y') > $didding[0]->getDateEndAt()->format('d/m/Y')){
+            dump($didding[0]->setIsActive(false));
+            $didding[0]->setIsActive(false);
 
-        if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
-            $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
+            if ($didding[0]->getBestPrice() == null) {
+
+                $didding[0]->setWinner(null);
+            }
+            else{
+                $didding[0]->setWinner(true)
+                    ->setPriceEnd($didding[0]->getBestPrice())
+                ;
+            }
+
+            $manager->persist($didding[0]);
+            $manager->flush();
         }
         else{
 
-            if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
-                $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+            
+            
+            $form->handleRequest($request);
+    
+            if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
+                $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
             }
             else{
-
-                if ($didding[0]->getPriceImmediate() != null) 
-                {
-                    if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
-                        $didding[0]->setIsActive(false)
-                            ->setWinner(true)
-                            ->setPriceEnd($didding[0]->getBestPrice())
-                        ;
-                    }
-                }
     
-                if ($form->isSubmitted() && $form->isValid()) {
+                if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
+                    $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+                }
+                else{
+    
+                    if ($didding[0]->getPriceImmediate() != null) 
+                    {
+                        if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
+                            $didding[0]->setIsActive(false)
+                                ->setWinner(true)
+                                ->setPriceEnd($didding[0]->getBestPrice())
+                            ;
+                        }
+                    }
         
-                    $didding[0]->setShopper($this->getUser());
-                    $didding[0]->setBestPrice($didding[0]->getPriceShopper());
-                    $didding[0]->setPriceShopper(null);
-        
-                    $manager->persist($didding[0]);
-                    $manager->flush();
-        
-                    // return $this->redirectToRoute('didding_all');
+                    if ($form->isSubmitted() && $form->isValid()) {
+            
+                        $didding[0]->setShopper($this->getUser());
+                        $didding[0]->setBestPrice($didding[0]->getPriceShopper());
+                        $didding[0]->setPriceShopper(null);
+            
+                        $manager->persist($didding[0]);
+                        $manager->flush();
+            
+                        // return $this->redirectToRoute('didding_all');
+                    }
                 }
             }
         }
+
+
+        
 
         dump($error);
 

@@ -44,7 +44,11 @@
                             {% else %} #}
                                 Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product_didding.id } ) }}">cliquer ici pour y accéder</a>
                             {% else %} 
-                                 {% if product_didding.isActive != true and product_didding.winner is not null  %}
+
+                            <pre>
+                                {{ dump(product_didding.winner) }}
+                            </pre>
+                                 {% if product_didding.isActive != true and product_didding.winner == true %}
                                         Ce produit a été vendu
                                  {% endif %}
                             {% endif %}

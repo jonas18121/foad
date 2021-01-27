@@ -73,11 +73,11 @@ class Product
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Didding::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=Didding::class, mappedBy="product", cascade={"persist", "remove"})
      */
     private $diddings;
 
-
+//    * @ORM\JoinColumn(onDelete="CASCADE")
 
     public function __construct()
     {

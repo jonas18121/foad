@@ -32,9 +32,9 @@
                         <th>{{ product.title }}</th>
                         <td>{{ product.content }}</td>
                         <td>{{ product.createdAt | date('d/m/Y H:i') }}</td>
-                        <td>{{ product.priceStart }}</td>
-                        <td>{{ product.priceEnd }}</td>
-                        <td>{{ product.priceImmediate }}</td>
+                        {# <td>{{ product.priceStart }}</td> #}
+                        {# <td>{{ product.priceEnd }}</td> #}
+                        {# <td>{{ product.priceImmediate }}</td> #}
                         {# <td>{{ product.user.lastName }}</td> #}
                         <td>{{ product.categorie.name }}</td>
                         {# <td>{{ product.photo }}</td> #}
@@ -69,9 +69,9 @@
                             </div>
                             <li>{{ product.title }}</li>
                             <li>{{ product.createdAt | date('d/m/Y H:i') }}</li>
-                            <li>{{ product.priceStart }}</li>
-                            <li>{{ product.priceEnd }}</li>
-                            <li>{{ product.priceImmediate }}</li>
+                            {# <li>{{ product.priceStart }}</li> #}
+                            {# <li>{{ product.priceEnd }}</li> #}
+                            {# <li>{{ product.priceImmediate }}</li> #}
                         </a>
                     </ul>
                 {% endfor %}

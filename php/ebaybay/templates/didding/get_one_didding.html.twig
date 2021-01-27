@@ -47,43 +47,54 @@
                 </p>
             </div>
 
+            
+
             {% if didding.0.winner == true %}
 
                 <p> L'enchère est terminer et à été remporter par {{ didding.0.shopper.lastName }} {{ didding.0.shopper.firstName }} au prix de {{ didding.0.bestPrice }} € </p>
             
             {% else %}
 
-
-                <div>
-                    {% if error is not null %}
-                        {{ error }}
-                    {% endif %}
-                </div>
-
-                <div>
-                    {{ form_start(formPriceShopper) }}
-
-                    <div class="">
-
-                        <div class="form-error">
-                            {{ form_errors(formPriceShopper.priceShopper) }}
+                {% if didding.0.winner == false and didding.0.isActive == false  %}
+                    <p>  L'enchère est terminer et n'a pas été vendu </p>
+                {% else %}
+                    
+                    {% if didding.0.isActive == true %}
+                        
+                        <div>
+                            {% if error is not null %}
+                                {{ error }}
+                            {% endif %}
                         </div>
-
-                        <label>Faire une enchère</label>
 
                         <div>
-                            {{ form_widget(formPriceShopper.priceShopper, { attr : { class : '' }} ) }}
+                            {{ form_start(formPriceShopper) }}
+
+                            <div class="">
+
+                                <div class="form-error">
+                                    {{ form_errors(formPriceShopper.priceShopper) }}
+                                </div>
+
+                                <label>Faire une enchère</label>
+
+                                <div>
+                                    {{ form_widget(formPriceShopper.priceShopper, { attr : { class : '' }} ) }}
+                                </div>
+                                
+                                <small> {{ form_help(formPriceShopper.priceShopper) }} </small>
+                            </div>
+
+                            <div class="">
+                                <button type="submit">Miser ce prix</button>
+                            </div>
+
+                            {{ form_end(formPriceShopper) }}
                         </div>
-                        
-                        <small> {{ form_help(formPriceShopper.priceShopper) }} </small>
-                    </div>
+                    {% endif %}
 
-                    <div class="">
-                        <button type="submit">Miser ce prix</button>
-                    </div>
+                {% endif %}
 
-                    {{ form_end(formPriceShopper) }}
-                </div>
 
             {% endif %}
 
