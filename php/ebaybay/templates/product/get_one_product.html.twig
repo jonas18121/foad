@@ -27,13 +27,30 @@
 
             <div>
                 <p>
-                    {% if product.0.didding is not null %}
+                    {% if product.0.diddings is not empty %}
+
+                        <pre>
+                            {{ dump(product.0.diddings) }}
+                        </pre>
+
+                        {% for product_didding in product.0.diddings %}
+
+                       {#  <pre>
+                            {{ dump(product_didding) }}
+                        </pre> #}
+                            
+                            {% if product_didding.isActive == true and product_didding.winner is null  %}
+                               {#  <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
+                            {% else %} #}
+                                Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product_didding.id } ) }}">cliquer ici pour y accéder</a>
+                            {% else %} 
+                                 {% if product_didding.isActive != true and product_didding.winner is not null  %}
+                                        Ce produit a été vendu
+                                 {% endif %}
+                            {% endif %}
+
+                        {% endfor %}
                     
-                        {% if product.0.didding.isActive != true  %}
-                            <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
-                        {% else %}
-                            Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product.0.didding.id } ) }}">cliquer ici pour y accéder</a> 
-                        {% endif %}
                         
                     {% else %}
                         <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>

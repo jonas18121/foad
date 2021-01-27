@@ -59,7 +59,7 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p, d, u')
-            ->leftJoin('p.didding', 'd')
+            ->leftJoin('p.diddings', 'd')
             ->leftJoin('p.user', 'u')
             ->andWhere('p.id IN (:id)')
             ->setParameter('id', $id)

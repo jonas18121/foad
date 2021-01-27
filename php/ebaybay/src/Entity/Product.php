@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -71,15 +73,16 @@ class Product
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Didding::class, mappedBy="product", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Didding::class, mappedBy="product")
      */
-    private $didding;
+    private $diddings;
 
 
 
     public function __construct()
     {
         $this->image = new EmbeddedFile();
+        $this->diddings = new ArrayCollection();
     }
 
 
@@ -196,19 +199,32 @@ class Product
         return $this;
     }
 
-    public function getDidding(): ?Didding
+    /**
+     * @return Collection|Didding[]
+     */
+    public function getDiddings(): Collection
     {
-        return $this->didding;
+        return $this->diddings;
     }
 
-    public function setDidding(Didding $didding): self
+    public function addDidding(Didding $didding): self
     {
-        // set the owning side of the relation if necessary
-        if ($didding->getProduct() !== $this) {
+        if (!$this->diddings->contains($didding)) {
+            $this->diddings[] = $didding;
             $didding->setProduct($this);
         }
 
-        $this->didding = $didding;
+        return $this;
+    }
+
+    public function removeDidding(Didding $didding): self
+    {
+        if ($this->diddings->removeElement($didding)) {
+            // set the owning side to null (unless already changed)
+            if ($didding->getProduct() === $this) {
+                $didding->setProduct(null);
+            }
+        }
 
         return $this;
     }
