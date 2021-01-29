@@ -52,39 +52,50 @@ class DiddingController extends AbstractController
         
         $form->handleRequest($request);
 
-        if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
-            $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
-        }
-        else{
+        
 
-            if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
-                $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
-            }
-            else{
-
-                if ($didding[0]->getPriceImmediate() != null) 
-                {
-                    if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
-                        $didding[0]->setIsActive(false)
-                            ->setWinner(true)
-                            ->setPriceEnd($didding[0]->getBestPrice())
-                        ;
-                    }
-                }
+                
     
                 if ($form->isSubmitted() && $form->isValid()) {
+
+                    if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
+                        $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
+                    }
+                    else{
+            
+                        if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
+                            $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+                        }
+                        else{
+
+                            // dd($didding[0]->getProduct()->getSold());
         
-                    $didding[0]->setShopper($this->getUser());
-                    $didding[0]->setBestPrice($didding[0]->getPriceShopper());
-                    $didding[0]->setPriceShopper(null);
-        
-                    $manager->persist($didding[0]);
-                    $manager->flush();
-        
-                    // return $this->redirectToRoute('didding_all');
+                            if ($didding[0]->getPriceImmediate() != null) 
+                            {
+                                if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
+
+                                    $didding[0]->setIsActive(false)
+                                        ->setWinner(true)
+                                        ->setBestPrice($didding[0]->getPriceShopper())
+                                        ->setPriceEnd($didding[0]->getBestPrice())
+                                    ;
+
+                                    $didding[0]->getProduct()->setSold(true);
+                                }
+                            }
+
+                            $didding[0]->setShopper($this->getUser())
+                                ->setBestPrice($didding[0]->getPriceShopper())
+                                ->setPriceShopper(null)
+                                // ->setPriceEnd($didding[0]->getBestPrice())
+                                // ->setSold(true)
+                            ;
+                
+                            $manager->persist($didding[0]);
+                            $manager->flush();
+                        }
+                    } // return $this->redirectToRoute('didding_all'); 
                 }
-            }
-        }
 
         dump($error);
 
@@ -125,6 +136,7 @@ class DiddingController extends AbstractController
 
         $didding->setProduct($product);
 
+        $product->setSold(null);
         
         $form = $this->createForm(DiddingType::class, $didding);
         

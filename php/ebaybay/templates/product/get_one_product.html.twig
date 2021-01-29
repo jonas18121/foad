@@ -29,31 +29,40 @@
                 <p>
                     {% if product.0.diddings is not empty %}
 
-                        <pre>
+                        {# <pre>
                             {{ dump(product.0.diddings) }}
-                        </pre>
+                        </pre> #}
 
                         {% for product_didding in product.0.diddings %}
 
-                       {#  <pre>
+                        <pre>
                             {{ dump(product_didding) }}
-                        </pre> #}
+                        </pre>
                             
                             {% if product_didding.isActive == true and product_didding.winner is null  %}
                                {#  <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
                             {% else %} #}
                                 Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product_didding.id } ) }}">cliquer ici pour y accéder</a>
+
                             {% else %} 
-                                 {% if product_didding.isActive != true and product_didding.winner is not null  %}
+
+                                {% if product_didding.isActive == false and product_didding.winner == true  %}
                                         Ce produit a été vendu
-                                 {% endif %}
+                                {% endif %}
+
+                                {# {% if product.0.sold == false %}
+                                    <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Remettre au enchère </a>
+                                {% endif %} #}
                             {% endif %}
 
                         {% endfor %}
-                    
+
+                        {% if product.0.sold == false and product.0.sold is not null %}
+                            <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Remettre au enchère </a>
+                        {% endif %}
                         
                     {% else %}
-                        <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
+                        <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère </a>
                     {% endif %}
                     
                 
