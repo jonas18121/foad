@@ -21,7 +21,10 @@
             <div>
                 <p>Titre :{{ product.0.title }}</p>
                 <p>Date de publication : {{ product.0.createdAt | date('d/m/Y H:i') }}</p>
-                <p>Prix fixe immédiat : {{ product.0.priceFixe }}</p>
+
+                {% if product.0.priceFixe is not null %}
+                    <p>Prix fixe immédiat : {{ product.0.priceFixe }}</p>
+                {% endif %}
 
             </div>
 

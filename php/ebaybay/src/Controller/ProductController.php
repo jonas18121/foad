@@ -19,7 +19,8 @@ class ProductController extends AbstractController
      */
     public function get_all_product(ProductRepository $repo): Response
     {
-        $products = $repo->findAll();
+        // $products = $repo->findAll();
+        $products = $repo->find_all_product();
 
         return $this->render('product/get_all_product.html.twig', [
             'products' => $products
