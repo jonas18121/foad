@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!{% endblock %}
+
+{% block body %}
+
+<pre>
+    {{ dump(all_message) }}
+</pre>
+
+    
+
+    <div>
+
+        {{ form_start(formMessage) }}
+
+        <div class="">
+            <button type="submit">Envoyer</button>
+        </div>
+        {{ form_end(formMessage) }}
+    </div>
+
+    {% for message in all_message %}
+        <div>
+            <pre>
+                {# {{ dump(message) }} #}
+            </pre>
+
+            <p>{{ message.userSend.lastName }} {{ message.userSend.firstName }} {{ message.createdAt | date('d/m/Y H:i:s') }}</p>
+            <p>{{ message.content }}</p>
+    
+        </div>
+    {% endfor %}
+{% endblock %}

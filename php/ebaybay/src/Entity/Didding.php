@@ -57,11 +57,6 @@ class Didding
      */
     private $isActive;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Product::class, inversedBy="didding", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $product;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="diddings")
@@ -72,6 +67,17 @@ class Didding
      * @ORM\Column(type="integer", nullable=true)
      */
     private $bestPrice;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $winner;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="diddings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
 
     public function getId(): ?int
     {
@@ -174,18 +180,6 @@ class Didding
         return $this;
     }
 
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(Product $product): self
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
     public function getShopper(): ?User
     {
         return $this->shopper;
@@ -206,6 +200,30 @@ class Didding
     public function setBestPrice(?int $bestPrice): self
     {
         $this->bestPrice = $bestPrice;
+
+        return $this;
+    }
+
+    public function getWinner(): ?bool
+    {
+        return $this->winner;
+    }
+
+    public function setWinner(?bool $winner): self
+    {
+        $this->winner = $winner;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }

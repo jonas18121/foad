@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Didding;
 use App\Entity\Product;
 use App\Form\DiddingType;
 use App\Form\PriceShopperType;
 use App\Repository\DiddingRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,36 +46,77 @@ class DiddingController extends AbstractController
     {
         $error = null;
         $didding = $repo->find_one_didding($id);
+        $dateCurrent = new \DateTime();
         
-        dump($didding[0]);
+        // dd($didding);
         
         $form = $this->createForm(PriceShopperType::class, $didding[0]);
         
         
         $form->handleRequest($request);
 
-        if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
-            $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
-        }
-        else{
 
-            if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
-                $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+        // a mettre dans un subcriber ou un sevrice
+        if ($dateCurrent->format('d/m/Y') > $didding[0]->getDateEndAt()->format('d/m/Y')) {
+            
+            $didding[0]->setIsActive(false);
+
+            if ($didding[0]->getBestPrice() !== null ) {
+                
+                $didding[0]->setWinner(true)
+                    ->setPriceEnd($didding[0]->getBestPrice())
+                    ->getProduct()->setSold(true);
+                ;
+            }
+            else{
+                $didding[0]->getProduct()->setSold(false);
+            }
+
+            $manager->persist($didding[0]);
+            $manager->flush();
+        }
+        
+
+                
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($didding[0]->getPriceShopper() < $didding[0]->getPriceStart()) {
+                $error = "Votre mise doit être égale ou plus élevé que prix de départ"; 
             }
             else{
     
-                if ($form->isSubmitted() && $form->isValid()) {
-        
-                    $didding[0]->setShopper($this->getUser());
-                    $didding[0]->setBestPrice($didding[0]->getPriceShopper());
-                    $didding[0]->setPriceShopper(null);
+                if ($didding[0]->getPriceShopper() <= $didding[0]->getBestPrice()) {
+                    $error = "Votre mise doit être plus élevé que le prix proposer par un autre acheteur"; 
+                }
+                else{
+
+                    // dd($didding[0]->getProduct()->getSold());
+
+                    if ($didding[0]->getPriceImmediate() != null) 
+                    {
+                        if ($didding[0]->getPriceShopper() >= $didding[0]->getPriceImmediate()) {
+
+                            $didding[0]->setIsActive(false)
+                                ->setWinner(true)
+                                ->setBestPrice($didding[0]->getPriceShopper())
+                                ->setPriceEnd($didding[0]->getBestPrice())
+                                ->getProduct()->setSold(true)
+                            ;
+                        }
+                    }
+
+                    $didding[0]->setShopper($this->getUser())
+                        ->setBestPrice($didding[0]->getPriceShopper())
+                        ->setPriceShopper(null)
+                        // ->setPriceEnd($didding[0]->getBestPrice())
+                        // ->setSold(true)
+                    ;
         
                     $manager->persist($didding[0]);
                     $manager->flush();
-        
-                    // return $this->redirectToRoute('didding_all');
                 }
-            }
+            } // return $this->redirectToRoute('didding_all'); 
         }
 
         dump($error);
@@ -109,12 +152,17 @@ class DiddingController extends AbstractController
     /**
      * @Route("/didding/add/product/{id}", name="didding_add", methods={"GET", "POST"})
      */
-    public function create_didding(Product $product, Request $request, EntityManagerInterface $manager)
+    public function create_didding($id, ProductRepository $repo, Request $request, EntityManagerInterface $manager)
     {
         $didding = new Didding();
 
+        $product = $repo->find_one_product_for_form($id);
+
+        dump($product );
+
         $didding->setProduct($product);
 
+        $product->setSold(null);
         
         $form = $this->createForm(DiddingType::class, $didding);
         

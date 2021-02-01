@@ -73,12 +73,23 @@ class User implements UserInterface
      */
     private $diddings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="userReceived")
+     */
+    private $messageReceived;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="userSend")
+     */
+    private $messageSend;
    
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->diddings = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->messageSend = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,6 +280,66 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($didding->getShopper() === $this) {
                 $didding->setShopper(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessageReceived(): Collection
+    {
+        return $this->messageReceived;
+    }
+
+    public function addMessageReceived(Message $message): self
+    {
+        if (!$this->messageReceived->contains($message)) {
+            $this->messageReceived[] = $message;
+            $message->setUserReceived($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messageReceived->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getUserReceived() === $this) {
+                $message->setUserReceived(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessageSend(): Collection
+    {
+        return $this->messageSend;
+    }
+
+    public function addMessageSend(Message $messageSend): self
+    {
+        if (!$this->messageSend->contains($messageSend)) {
+            $this->messageSend[] = $messageSend;
+            $messageSend->setUserSend($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageSend(Message $messageSend): self
+    {
+        if ($this->messageSend->removeElement($messageSend)) {
+            // set the owning side to null (unless already changed)
+            if ($messageSend->getUserSend() === $this) {
+                $messageSend->setUserSend(null);
             }
         }
 

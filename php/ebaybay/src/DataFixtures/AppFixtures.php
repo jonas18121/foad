@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
             $category = new Category();
 
             $category->setName("Nom de categorie n° {$j}")
-                ->setCreateAt(new \DateTime())
+                ->setCreatedAt(new \DateTime())
             ;
 
             for ($i = 1; $i <= 10 ; $i++) { 
@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
                 $product->setTitle("Titre n° {$i}")
                     ->setContent("Contenu {$i}")
                     ->setCreatedAt(new \DateTime())
-                    ->setPriceImmediate(4 . $i)
+                    ->setPriceFixe(4 . $i)
                 ;
     
                 $manager->persist($product);
