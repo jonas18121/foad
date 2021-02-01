@@ -77,6 +77,11 @@ class Product
      */
     private $diddings;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $sold;
+
 
 
     public function __construct()
@@ -225,6 +230,18 @@ class Product
                 $didding->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSold(): ?bool
+    {
+        return $this->sold;
+    }
+
+    public function setSold(?bool $sold): self
+    {
+        $this->sold = $sold;
 
         return $this;
     }

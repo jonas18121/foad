@@ -21,7 +21,10 @@
             <div>
                 <p>Titre :{{ product.0.title }}</p>
                 <p>Date de publication : {{ product.0.createdAt | date('d/m/Y H:i') }}</p>
-                <p>Prix fixe immédiat : {{ product.0.priceFixe }}</p>
+
+                {% if product.0.priceFixe is not null %}
+                    <p>Prix fixe immédiat : {{ product.0.priceFixe }}</p>
+                {% endif %}
 
             </div>
 
@@ -30,30 +33,52 @@
                     {% if product.0.diddings is not empty %}
 
                         <pre>
-                            {{ dump(product.0.diddings) }}
+                            {# {{ dump(product.0.diddings) }} #}
                         </pre>
+                        
 
                         {% for product_didding in product.0.diddings %}
 
-                       {#  <pre>
+                        <pre>
                             {{ dump(product_didding) }}
-                        </pre> #}
+                        </pre>
+
+                        <pre>
+                            {{ dump(app.user == product_didding.shopper) }}
+                        </pre>
+
+                            {% if app.user == product_didding.shopper %}
+                                <a href="{{ path('message_with_owner', { 'product_id' : product.0.id, 'didding_id' : product_didding.id } ) }}">Envoyer un message</a>
+                            {% endif %}
                             
                             {% if product_didding.isActive == true and product_didding.winner is null  %}
                                {#  <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
                             {% else %} #}
                                 Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product_didding.id } ) }}">cliquer ici pour y accéder</a>
+
+                                
+                                
+                                
+
                             {% else %} 
-                                 {% if product_didding.isActive != true and product_didding.winner is not null  %}
+
+                                {% if product_didding.isActive == false and product_didding.winner == true  %}
                                         Ce produit a été vendu
-                                 {% endif %}
+                                {% endif %}
+
+                                {# {% if product.0.sold == false %}
+                                    <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Remettre au enchère </a>
+                                {% endif %} #}
                             {% endif %}
 
                         {% endfor %}
-                    
+
+                        {% if product.0.sold == false and product.0.sold is not null %}
+                            <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Remettre au enchère </a>
+                        {% endif %}
                         
                     {% else %}
-                        <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
+                        <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère </a>
                     {% endif %}
                     
                 
