@@ -30,7 +30,7 @@ class Message
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="messageReceived")
      */
     private $userReceived;
 

@@ -56,9 +56,8 @@ class MessageController extends AbstractController
                 $message->setUserReceived($owner_product->getUser());
                 $manager->persist($message);
 
-                $owner_product->getUser()->addMessage($message);
+                $owner_product->getUser()->addMessageReceived($message);
                 $manager->persist($owner_product);
-                // dd('ok');
             }
             elseif( $this->getUser() == $owner_product->getUser())
             {
@@ -66,7 +65,7 @@ class MessageController extends AbstractController
                 $message->setUserReceived($shopper_product->getShopper());
                 $manager->persist($message);
 
-                $shopper_product->getShopper()->addMessage($message);
+                $shopper_product->getShopper()->addMessageReceived($message);
                 $manager->persist($shopper_product);
             }
 
