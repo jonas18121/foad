@@ -32,20 +32,33 @@
                 <p>
                     {% if product.0.diddings is not empty %}
 
-                        {# <pre>
-                            {{ dump(product.0.diddings) }}
-                        </pre> #}
+                        <pre>
+                            {# {{ dump(product.0.diddings) }} #}
+                        </pre>
+                        
 
                         {% for product_didding in product.0.diddings %}
 
                         <pre>
                             {{ dump(product_didding) }}
                         </pre>
+
+                        <pre>
+                            {{ dump(app.user == product_didding.shopper) }}
+                        </pre>
+
+                            {% if app.user == product_didding.shopper %}
+                                <a href="{{ path('message_with_owner', { 'product_id' : product.0.id, 'didding_id' : product_didding.id } ) }}">Envoyer un message</a>
+                            {% endif %}
                             
                             {% if product_didding.isActive == true and product_didding.winner is null  %}
                                {#  <a href="{{ path('didding_add', { 'id' : product.0.id } ) }}">Mettre au enchère</a>
                             {% else %} #}
                                 Ce produit est actuellement aux enchère <a href="{{ path('didding_one', { 'id' : product_didding.id } ) }}">cliquer ici pour y accéder</a>
+
+                                
+                                
+                                
 
                             {% else %} 
 

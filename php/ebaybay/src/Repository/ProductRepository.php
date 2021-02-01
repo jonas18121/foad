@@ -58,11 +58,12 @@ class ProductRepository extends ServiceEntityRepository
     public function find_one_product($id)
     {
         return $this->createQueryBuilder('p')
-            ->select('p, d, u, c')
+            ->select('p, d, user, c')
             ->leftJoin('p.diddings', 'd')
-            ->leftJoin('p.user', 'u')
+            // ->innerJoin('p.user', 'user')
             ->leftJoin('p.categorie', 'c')
             ->andWhere('p.id IN (:id)')
+            ->leftJoin('d.shopper', 'user')
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
@@ -105,6 +106,36 @@ class ProductRepository extends ServiceEntityRepository
             ->leftJoin('p.categorie', 'c')
             ->getQuery()
             ->getResult();
+        ;
+    }
+
+    public function find_owner_product($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p, user')
+            ->leftJoin('p.diddings', 'd')
+            ->innerJoin('p.user', 'user')
+            // ->leftJoin('p.categorie', 'c')
+            ->andWhere('p.id IN (:id)')
+            // ->leftJoin('d.shopper', 'user')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+        ;
+    }
+
+    public function find_shopper_product($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p, user, d')
+            ->leftJoin('p.diddings', 'd')
+            // ->innerJoin('p.user', 'user')
+            // ->leftJoin('p.categorie', 'c')
+            ->andWhere('p.id IN (:id)')
+            ->leftJoin('d.shopper', 'user')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
         ;
     }
 }
