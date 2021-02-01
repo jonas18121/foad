@@ -76,7 +76,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="userReceived")
      */
-    private $messages;
+    private $messageReceived;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="userSend")
@@ -289,15 +289,15 @@ class User implements UserInterface
     /**
      * @return Collection|Message[]
      */
-    public function getMessages(): Collection
+    public function getMessageReceived(): Collection
     {
-        return $this->messages;
+        return $this->messageReceived;
     }
 
-    public function addMessage(Message $message): self
+    public function addMessageReceived(Message $message): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
+        if (!$this->messageReceived->contains($message)) {
+            $this->messageReceived[] = $message;
             $message->setUserReceived($this);
         }
 
@@ -306,7 +306,7 @@ class User implements UserInterface
 
     public function removeMessage(Message $message): self
     {
-        if ($this->messages->removeElement($message)) {
+        if ($this->messageReceived->removeElement($message)) {
             // set the owning side to null (unless already changed)
             if ($message->getUserReceived() === $this) {
                 $message->setUserReceived(null);

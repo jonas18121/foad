@@ -23,7 +23,7 @@
     {% for message in all_message %}
         <div>
             <pre>
-                {{ dump(message) }}
+                {# {{ dump(message) }} #}
             </pre>
 
             <p>{{ message.userSend.lastName }} {{ message.userSend.firstName }} {{ message.createdAt | date('d/m/Y H:i:s') }}</p>
