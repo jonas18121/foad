@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir tous les tickets{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <section>
+        <h1>Voir tous les tickets</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Titre du ticket</th>
+                    <th scope="col">Contenu du ticket</th>
+                    <th scope="col">Date de création du ticket</th>
+                    <th scope="col">catégorie du ticket</th>
+                    <th scope="col">Auteur du ticket</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ticket in tickets %}
+
+                    <tr>
+                        <td>{{ ticket.title }}</td>
+                        <td>{{ ticket.content }}</td>
+                        <td>{{ ticket.dateCreatedAt }}</td>
+                        <td>{{ ticket.category.name }}</td>
+                        {# <td>
+                            {{ ticket.author.firstName }}
+                            {{ ticket.author.lastName }}
+                        </td> #}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div> 
+{% endblock %}
