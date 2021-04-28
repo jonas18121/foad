@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,34 +12,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
-    private Request $request;
     private EntityManagerInterface $entityManager;
+    private CategoryRepository $categoryRepository;
 
-    public function __construct(Request $request, EntityManagerInterface $entityManager)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        CategoryRepository $categoryRepository
+    )
     {
-        $this->request = $request;
         $this->entityManager = $entityManager;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
      * @Route("/category", name="category")
      */
-    public function index(): Response
+    public function get_all_category(): Response
     {
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
-        ]);
-    }
+        $categories = $this->categoryRepository->findAll();
 
-    /**
-     * @Route("/category/add", name="add_category")
-     */
-    public function create_category(): Response
-    {
-        $category = new Category;
-
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+        return $this->render('category/get_all_category.html.twig', [
+            'categories' => $categories,
         ]);
     }
     
