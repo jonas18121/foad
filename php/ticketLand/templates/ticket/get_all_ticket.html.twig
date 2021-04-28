@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ ticket.title }}</td>
                         <td>{{ ticket.content }}</td>
-                        <td>{{ ticket.dateCreatedAt }}</td>
+                        <td>{{ ticket.dateCreatedAt | date('d/m/Y H:i') }}</td>
                         <td>{{ ticket.category.name }}</td>
                         {# <td>
                             {{ ticket.author.firstName }}
