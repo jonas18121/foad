@@ -22,16 +22,18 @@
             <tbody>
                 {% for ticket in tickets %}
 
+                        
                     <tr>
-                        <td>{{ ticket.title }}</td>
-                        <td>{{ ticket.content }}</td>
-                        <td>{{ ticket.dateCreatedAt | date('d/m/Y H:i') }}</td>
-                        <td>{{ ticket.category.name }}</td>
+                        <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.title }}</a></td>
+                        <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.content }}</a></td>
+                        <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.dateCreatedAt | date('d/m/Y H:i') }}</a></td>
+                        <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.category.name }}</a></td>
                         {# <td>
                             {{ ticket.author.firstName }}
                             {{ ticket.author.lastName }}
                         </td> #}
                     </tr>
+                        
                 {% endfor %}
             </tbody>
         </table>
