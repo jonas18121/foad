@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -28,6 +29,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Catégorie', 'fas fa-layer-group', Category::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-layer-group', Category::class);
     }
 }
