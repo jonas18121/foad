@@ -46,6 +46,21 @@ class TicketController extends AbstractController
     }
 
     /**
+     * @Route("/ticket/{id}", name="ticket_one")
+     */
+    public function get_one_ticket(Ticket $ticket): Response
+    {
+
+        if (!$ticket) {
+            return $this->redirectToRoute('ticket_all');
+        }
+
+        return $this->render('ticket/get_one_ticket.html.twig', [
+            'ticket' => $ticket,
+        ]);
+    }
+
+    /**
      * @Route("/ticket/add", name="ticket_add")
      */
     public function create_ticket(Request $request)
@@ -72,5 +87,47 @@ class TicketController extends AbstractController
         return $this->render('ticket/create_ticket.html.twig', [
             'formTicket' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/ticket/edit/{id}", name="ticket_edit")
+     */
+    public function edit_ticket(Ticket $ticket, Request $request)
+    {
+        $form = $this->createForm(TicketType::class, $ticket, [ 'method' => 'PUT']);
+        
+        $form->handleRequest($request);
+        
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // $ticket->setDateUpdatedAt(new \DateTime());
+
+            $this->entityManager->persist($ticket);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('ticket_all');
+        }
+
+        return $this->render('ticket/edit_ticket.html.twig', [
+            'formTicket' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/ticket/delete/{id}", name="ticket_delete", requirements={"id": "\d+"})
+     */
+    public function delete_ticket(Ticket $ticket, Request $request)
+    {
+        if($this->isCsrfTokenValid('delete', $request->get('_token'))){
+
+
+            $this->entityManager->remove($ticket);
+            $this->entityManager->flush();
+
+            $this->addFlash('success',"Votre ticket a été supprimé !");
+        }
+
+        return $this->redirectToRoute('ticket_all');
     }
 }
