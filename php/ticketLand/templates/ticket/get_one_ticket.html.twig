@@ -5,7 +5,7 @@
 {% block body %}
 
     <section>
-        <h1>Espaces de stockage</h1>
+        <h1>Ticket n° {{ ticket.id }}</h1>
 
         <article>
 
@@ -39,6 +39,60 @@
                     </ul>
                 {# {% else %}
                 {% endif %} #}
+            </div>
+        </article>
+
+        <article>
+            <div id="add_message">
+                <h2>Ajouter un message</h2>
+
+                {{ form_start(formMessage, { 'attr' : { 'class' : 'form' }} ) }}
+
+                    <div class="form_group">
+
+                        <div class="form-error">
+                            {{ form_errors(formMessage.content) }}
+                        </div>
+
+                        <label for="inputTitle">Message : </label>
+
+                        <div>
+                            {{ form_widget(formMessage.content, {attr : {class : 'form_control' }} ) }}
+                        </div>
+                        
+                        <small>{{ form_errors(formMessage.content) }} </small>
+
+                    </div>
+
+                    <button type="submit" class="btn_submit">Ajouter</button>
+
+                {{ form_end(formMessage) }}
+            </div>
+        </article>
+
+        <article>
+            <div>
+                <h2>Réponse au ticket</h2>
+
+                {% for message in ticket.messages %}
+
+                    <div>
+
+                        {# <h3>message de {{ message.author.lastName }} {{ message.author.firstName }}</h3> #}
+                        <p> Le {{ message.dateCreatedAt | date('d/m/Y H:i') }}
+                            <span>
+                                {# <a href="{{ path('message_delete', { 'id' : message.id } ) }}">supprimer</a> #}
+                                <form method="POST" action="{{ path('message_delete', { 'id' : message.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sur de vouloir annuler votre message ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                                    <button> Supprimer </button>
+                                </form>
+                            </span>
+                        </p>
+                        <p>{{ message.content }}</P>
+                        <hr>
+                    </div>
+                {% endfor %}
             </div>
         </article>
     </section>
