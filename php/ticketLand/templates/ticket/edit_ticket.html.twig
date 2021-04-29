@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Créer un ticket' %}
+
+{% block body %}
+    <div class="form_container">
+
+        <h1>Créer un ticket</h1>
+
+        {{ form_start(formTicket, { 'attr' : { 'class' : 'form' }} ) }}
+
+            <div class="form_group">
+
+                <div class="form-error">
+                    {{ form_errors(formTicket.title) }}
+                </div>
+
+                <label for="inputTitle">Titre : </label>
+
+                <div>
+                    {{ form_widget(formTicket.title, {attr : {class : 'form_control' }} ) }}
+                </div>
+                
+                <small>{{ form_errors(formTicket.title) }} </small>
+
+            </div>
+
+            <div class="form_group">
+
+                <div class="form-error">
+                    {{ form_errors(formTicket.content) }}
+                </div>
+
+                <label for="inputDescription">Contenu : </label>
+
+                <div>
+                    {{ form_widget(formTicket.content, {attr : {class : 'form_control' }} ) }}
+                </div>
+                
+                <small>{{ form_errors(formTicket.content) }} </small>
+
+            </div>
+
+            <div class="form_group">
+
+                <div class="form-error">
+                    {{ form_errors(formTicket.category) }}
+                </div>
+
+                <label for="inputCategory">Categorie : </label>
+
+                <div>
+                    {{ form_widget(formTicket.category, {attr : {class : 'form_control' }} ) }}
+                </div>
+                
+                <small>{{ form_errors(formTicket.category) }} </small>
+
+            </div>
+
+            <button type="submit" class="btn_submit">Modifier</button>
+
+        {{ form_end(formTicket) }}
+    </div>
+{% endblock body %}

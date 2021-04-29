@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir un ticket{% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1>Espaces de stockage</h1>
+
+        <article>
+
+            <h2>{{ ticket.title }}</h2>
+
+            <div>
+                <p>Créer le : {{ ticket.dateCreatedAt | date('d/m/Y H:i') }}</p>
+                <p>Categorie : {{ ticket.category.name }}</p>
+                <p>{{ ticket.content }}</p>
+
+                {# {% if app.user %} #}
+                    <ul>
+                        <li>
+                            {# {% if ticket.author.id == app.user.id %} #}
+                                <button>
+                                    <a href="{{ path('ticket_edit', { 'id' : ticket.id } ) }}">Modifier</a>
+                                </button>
+
+                                <span>
+                                    {# <a href="{{ path('ticket_delete', { 'id' : ticket.id } ) }}">Supprimer</a> #}
+
+                                    <form method="POST" action="{{ path('ticket_delete', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sur de vouloir annuler votre ticket ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                                        <button> Supprimer </button>
+                                    </form>
+                                </span>
+                            {# {% else %}
+                            {% endif %} #}
+                        </li>
+                    </ul>
+                {# {% else %}
+                {% endif %} #}
+            </div>
+        </article>
+    </section>
+{% endblock %}
