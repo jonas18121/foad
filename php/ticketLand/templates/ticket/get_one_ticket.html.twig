@@ -7,6 +7,20 @@
     <section>
         <h1>Ticket n° {{ ticket.id }}</h1>
 
+        <div>
+            {% if ticket.close == false %}
+                <form method="POST" action="{{ path('ticket_close', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir fermer ce ticket ?')">
+                    <input type="hidden" name="_token" value="{{ csrf_token('close_ticket') }}">
+                    <button> Fermer ce ticket </button>
+                </form>
+            {% else %}
+                <form method="POST" action="{{ path('ticket_open', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir ouvrir ce ticket ?')">
+                    <input type="hidden" name="_token" value="{{ csrf_token('open_ticket') }}">
+                    <button> Ouvrir ce ticket </button>
+                </form>
+            {% endif %}
+        </div>
+
         <article>
 
             <h2>{{ ticket.title }}</h2>
@@ -16,10 +30,10 @@
                 <p>Categorie : {{ ticket.category.name }}</p>
                 <p>{{ ticket.content }}</p>
 
-                {# {% if app.user %} #}
+                {% if app.user %}
                     <ul>
                         <li>
-                            {# {% if ticket.author.id == app.user.id %} #}
+                            {% if ticket.author.id == app.user.id %}
                                 <button>
                                     <a href="{{ path('ticket_edit', { 'id' : ticket.id } ) }}">Modifier</a>
                                 </button>
@@ -33,42 +47,47 @@
                                         <button> Supprimer </button>
                                     </form>
                                 </span>
-                            {# {% else %}
-                            {% endif %} #}
+                            {% else %}
+                            {% endif %}
                         </li>
                     </ul>
-                {# {% else %}
-                {% endif %} #}
+                {% else %}
+                {% endif %}
             </div>
         </article>
 
-        <article>
-            <div id="add_message">
-                <h2>Ajouter un message</h2>
+        {% if ticket.close == false %}
+            <article>
+                <div id="add_message">
 
-                {{ form_start(formMessage, { 'attr' : { 'class' : 'form' }} ) }}
+                    <h2>Ajouter un message</h2>
 
-                    <div class="form_group">
+                    {{ form_start(formMessage, { 'attr' : { 'class' : 'form' }} ) }}
 
-                        <div class="form-error">
-                            {{ form_errors(formMessage.content) }}
+                        <div class="form_group">
+
+                            <div class="form-error">
+                                {{ form_errors(formMessage.content) }}
+                            </div>
+
+                            <label for="inputTitle">Message : </label>
+
+                            <div>
+                                {{ form_widget(formMessage.content, {attr : {class : 'form_control' }} ) }}
+                            </div>
+                            
+                            <small>{{ form_errors(formMessage.content) }} </small>
+
                         </div>
 
-                        <label for="inputTitle">Message : </label>
+                        <button type="submit" class="btn_submit">Ajouter</button>
 
-                        <div>
-                            {{ form_widget(formMessage.content, {attr : {class : 'form_control' }} ) }}
-                        </div>
-                        
-                        <small>{{ form_errors(formMessage.content) }} </small>
-
-                    </div>
-
-                    <button type="submit" class="btn_submit">Ajouter</button>
-
-                {{ form_end(formMessage) }}
-            </div>
-        </article>
+                    {{ form_end(formMessage) }}
+                </div>
+            </article>
+        {% else %}
+            <p>Ce ticket a été fermer le {{ ticket.dateUpdatedAt | date('d/m/Y H:i') }}</p>
+        {% endif %}
 
         <article>
             <div>
@@ -78,7 +97,7 @@
 
                     <div>
 
-                        {# <h3>message de {{ message.author.lastName }} {{ message.author.firstName }}</h3> #}
+                        <p>Message de <strong>{{ message.author.lastName }} {{ message.author.firstName }}</strong></p>
                         <p> Le {{ message.dateCreatedAt | date('d/m/Y H:i') }}
                             <span>
                                 {# <a href="{{ path('message_delete', { 'id' : message.id } ) }}">supprimer</a> #}

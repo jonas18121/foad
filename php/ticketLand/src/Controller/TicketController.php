@@ -68,7 +68,7 @@ class TicketController extends AbstractController
 
             $message->setDateCreatedAt(new DateTime())
                 ->setTicket($ticket)
-                // ->setAuthor($this->getUser())
+                ->setAuthor($this->getUser())
             ;
 
             $this->entityManager->persist($message);
@@ -100,7 +100,7 @@ class TicketController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $ticket->setDateCreatedAt(new \DateTime())
-            // ->setAuthor($this->getUser())
+                ->setAuthor($this->getUser())
             ;
 
             $this->entityManager->persist($ticket);
@@ -126,7 +126,7 @@ class TicketController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             
-            // $ticket->setDateUpdatedAt(new \DateTime());
+            $ticket->setDateUpdatedAt(new \DateTime());
 
             $this->entityManager->persist($ticket);
             $this->entityManager->flush();
@@ -137,6 +137,48 @@ class TicketController extends AbstractController
         return $this->render('ticket/edit_ticket.html.twig', [
             'formTicket' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/ticket/close/{id}", name="ticket_close", methods={"GET","POST"}, requirements={"id"="\d+"})
+     */
+    public function close_ticket(Ticket $ticket, Request $request)
+    {
+
+        if($this->isCsrfTokenValid('close_ticket', $request->get('_token'))){
+
+            $ticket->setDateUpdatedAt(new \DateTime())
+                ->setClose(true)
+            ;
+            
+            $this->entityManager->persist($ticket);
+            $this->entityManager->flush();
+
+            $this->addFlash('success',"Le ticket a bien été fermer !");
+        }
+
+        return $this->redirectToRoute('ticket_one', [ 'id' => $ticket->getId()]);
+    }
+
+    /**
+     * @Route("/ticket/open/{id}", name="ticket_open", methods={"GET","POST"}, requirements={"id"="\d+"})
+     */
+    public function open_ticket(Ticket $ticket, Request $request)
+    {
+
+        if($this->isCsrfTokenValid('open_ticket', $request->get('_token'))){
+
+            $ticket->setDateUpdatedAt(new \DateTime())
+                ->setClose(false)
+            ;
+            
+            $this->entityManager->persist($ticket);
+            $this->entityManager->flush();
+
+            $this->addFlash('success',"Le ticket a bien été ouvert !");
+        }
+
+        return $this->redirectToRoute('ticket_one', [ 'id' => $ticket->getId()]);
     }
 
     /**
