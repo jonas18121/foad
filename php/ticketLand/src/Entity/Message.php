@@ -37,6 +37,12 @@ class Message
      */
     private $ticket;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Message
     public function setTicket(?Ticket $ticket): self
     {
         $this->ticket = $ticket;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -45,6 +45,22 @@ class Ticket
      */
     private $messages;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tickets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateUpdatedAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $close = false;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -129,6 +145,42 @@ class Ticket
                 $message->setTicket(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getDateUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateUpdatedAt;
+    }
+
+    public function setDateUpdatedAt(?\DateTimeInterface $dateUpdatedAt): self
+    {
+        $this->dateUpdatedAt = $dateUpdatedAt;
+
+        return $this;
+    }
+
+    public function getClose(): ?bool
+    {
+        return $this->close;
+    }
+
+    public function setClose(?bool $close): self
+    {
+        $this->close = $close;
 
         return $this;
     }

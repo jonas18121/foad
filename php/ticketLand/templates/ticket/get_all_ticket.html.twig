@@ -28,10 +28,12 @@
                         <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.content }}</a></td>
                         <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.dateCreatedAt | date('d/m/Y H:i') }}</a></td>
                         <td><a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">{{ ticket.category.name }}</a></td>
-                        {# <td>
-                            {{ ticket.author.firstName }}
-                            {{ ticket.author.lastName }}
-                        </td> #}
+                        <td>
+                            <a href="{{ path('ticket_one', { 'id' : ticket.id } ) }}">
+                                {{ ticket.author.firstName }}
+                                {{ ticket.author.lastName }}
+                            </a>
+                        </td>
                     </tr>
                         
                 {% endfor %}
