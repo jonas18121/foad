@@ -46,6 +46,6 @@ security:
     access_control:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/support, roles: [ ROLE_SUPPORT, ROLE_ADMIN ] }
-        - { path: ^/ticket/(close|open)/\d+$, roles: [ ROLE_SUPPORT, ROLE_ADMIN ] }
+        - { path: ^/ticket/(close|open|category/change)/\d+$, roles: [ ROLE_SUPPORT, ROLE_ADMIN ] }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
