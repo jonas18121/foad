@@ -7,19 +7,25 @@
     <section>
         <h1>Ticket n° {{ ticket.id }}</h1>
 
-        <div>
-            {% if ticket.close == false %}
-                <form method="POST" action="{{ path('ticket_close', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir fermer ce ticket ?')">
-                    <input type="hidden" name="_token" value="{{ csrf_token('close_ticket') }}">
-                    <button> Fermer ce ticket </button>
-                </form>
-            {% else %}
-                <form method="POST" action="{{ path('ticket_open', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir ouvrir ce ticket ?')">
-                    <input type="hidden" name="_token" value="{{ csrf_token('open_ticket') }}">
-                    <button> Ouvrir ce ticket </button>
-                </form>
-            {% endif %}
-        </div>
+        {% if is_granted('ROLE_SUPPORT') or is_granted('ROLE_ADMIN') %}
+        
+            <div>
+                {% if ticket.close == false %}
+                    <form method="POST" action="{{ path('ticket_close', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir fermer ce ticket ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('close_ticket') }}">
+                        <button> Fermer ce ticket </button>
+                    </form>
+                {% else %}
+                    <form method="POST" action="{{ path('ticket_open', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sûr de vouloir ouvrir ce ticket ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('open_ticket') }}">
+                        <button> Ouvrir ce ticket </button>
+                    </form>
+                {% endif %}
+            </div>
+            <div>
+                <p><a href="{{ path('change_category', { 'id_category' : ticket.category.id, 'id_ticket' : ticket.id })}}">changer de categorie</a></p>
+            </div>
+        {% endif %}
 
         <article>
 
@@ -30,25 +36,23 @@
                 <p>Categorie : {{ ticket.category.name }}</p>
                 <p>{{ ticket.content }}</p>
 
-                {% if app.user %}
+               
+                {% if ticket.author.id == app.user.id %}
                     <ul>
                         <li>
-                            {% if ticket.author.id == app.user.id %}
-                                <button>
-                                    <a href="{{ path('ticket_edit', { 'id' : ticket.id } ) }}">Modifier</a>
-                                </button>
+                            <button>
+                                <a href="{{ path('ticket_edit', { 'id' : ticket.id } ) }}">Modifier</a>
+                            </button>
 
-                                <span>
-                                    {# <a href="{{ path('ticket_delete', { 'id' : ticket.id } ) }}">Supprimer</a> #}
+                            <span>
+                                {# <a href="{{ path('ticket_delete', { 'id' : ticket.id } ) }}">Supprimer</a> #}
 
-                                    <form method="POST" action="{{ path('ticket_delete', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sur de vouloir annuler votre ticket ?')">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                                        <button> Supprimer </button>
-                                    </form>
-                                </span>
-                            {% else %}
-                            {% endif %}
+                                <form method="POST" action="{{ path('ticket_delete', { 'id' : ticket.id }) }}" class="middle" onsubmit="return confirm('Etes-vous sur de vouloir annuler votre ticket ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                                    <button> Supprimer </button>
+                                </form>
+                            </span>
                         </li>
                     </ul>
                 {% else %}

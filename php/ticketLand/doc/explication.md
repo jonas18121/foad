@@ -1,6 +1,6 @@
 
 
-## Erreur Semaphore extension (sysvsem) is required
+## Erreur : Semaphore extension (sysvsem) is required
 
 pour réglé cette erreur, on va dans le fichier `.env` et change le `LOCK_DSN=semaphore` en `LOCK_DSN=flock`
 
