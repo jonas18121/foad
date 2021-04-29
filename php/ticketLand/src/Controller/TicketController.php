@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Ticket;
+use App\Entity\Message;
 use App\Form\TicketType;
+use App\Form\MessageType;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,15 +51,36 @@ class TicketController extends AbstractController
     /**
      * @Route("/ticket/{id}", name="ticket_one")
      */
-    public function get_one_ticket(Ticket $ticket): Response
+    public function get_one_ticket(Ticket $ticket, Request $request): Response
     {
-
         if (!$ticket) {
             return $this->redirectToRoute('ticket_all');
         }
 
+        // Partie Message
+        $message = new Message();
+
+        $formMessage = $this->createForm(MessageType::class, $message);
+
+        $formMessage->handleRequest($request);
+
+        if ($formMessage->isSubmitted() && $formMessage->isValid()) {
+
+            $message->setDateCreatedAt(new DateTime())
+                ->setTicket($ticket)
+                // ->setAuthor($this->getUser())
+            ;
+
+            $this->entityManager->persist($message);
+            $this->entityManager->flush();
+
+            $this->addFlash('message', 'Votre message a bien été envoyé');
+            return $this->redirectToRoute('ticket_one', [ 'id' => $ticket->getId()]);
+        }
+
         return $this->render('ticket/get_one_ticket.html.twig', [
             'ticket' => $ticket,
+            'formMessage' => $formMessage->createView()
         ]);
     }
 
