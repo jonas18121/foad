@@ -23,7 +23,7 @@
                 {% endif %}
             </div>
             <div>
-                <p><a href="{{ path('change_category', { 'id_category' : ticket.category.id, 'id_ticket' : ticket.id })}}">changer de categorie</a></p>
+                <p><a href="{{ path('change_category_of_ticket', { 'id_ticket' : ticket.id })}}">changer de categorie</a></p>
             </div>
         {% endif %}
 

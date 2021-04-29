@@ -8,6 +8,7 @@ use App\Entity\Message;
 use App\Form\TicketType;
 use App\Form\MessageType;
 use App\Repository\TicketRepository;
+use App\Form\ChangeCategoryOfTicketType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -197,7 +198,7 @@ class TicketController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('ticket_all');
         }
-        
+
         if($this->isCsrfTokenValid('delete', $request->get('_token'))){
 
 
@@ -208,5 +209,32 @@ class TicketController extends AbstractController
         }
 
         return $this->redirectToRoute('ticket_all');
+    }
+
+    /**
+     * @Route("/ticket/category/change/{id_ticket}", name="change_category_of_ticket", methods={"GET","PUT"}, requirements={"id"="\d+"})
+     */
+    public function change_category($id_ticket, Request $request): Response
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('ticket_all');
+        }
+
+        $ticket = $this->entityManager->getRepository(Ticket::class)->findOneBy([ 'id' => $id_ticket ]);
+
+        $form = $this->createForm(ChangeCategoryOfTicketType::class, $ticket, [ 'method' => 'PUT']);
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($ticket);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('ticket_all');
+        }
+
+        return $this->render('category/change_category.html.twig', [
+            'formTicket' => $form->createView()
+        ]);
     }
 }
