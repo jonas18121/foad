@@ -22,6 +22,9 @@
                     <li><a href='{{ path('ticket_all') }}' >Ticket</a></li>
 
                     {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href='{{ path('admin') }}' >Administration</a></li>
+                        {% endif %}
                         <li><a href='{{ path('ticket_add') }}' >Ajouter un ticket</a></li>
                         <li><a href="{{ path('app_logout') }}"> Déconnexion </a></li>
                     {% else %}
