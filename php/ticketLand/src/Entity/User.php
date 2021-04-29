@@ -34,6 +34,26 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateUpdatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +133,53 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getDateCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateCreatedAt;
+    }
+
+    public function setDateCreatedAt(\DateTimeInterface $dateCreatedAt): self
+    {
+        $this->dateCreatedAt = $dateCreatedAt;
+
+        return $this;
+    }
+
+    public function getDateUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->dateUpdatedAt;
+    }
+
+    public function setDateUpdatedAt(?\DateTimeInterface $dateUpdatedAt): self
+    {
+        $this->dateUpdatedAt = $dateUpdatedAt;
+
+        return $this;
     }
 }
