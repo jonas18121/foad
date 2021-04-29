@@ -61,7 +61,8 @@ class TicketController extends AbstractController
     }
 
     /**
-     * @Route("/ticket/add", name="ticket_add")
+     * @Route("/ticket_add", name="ticket_add", methods={"GET","POST"}, requirements={"id"="\d+"})
+     * 
      */
     public function create_ticket(Request $request)
     {
@@ -87,10 +88,10 @@ class TicketController extends AbstractController
         return $this->render('ticket/create_ticket.html.twig', [
             'formTicket' => $form->createView()
         ]);
-    }
+    } 
 
     /**
-     * @Route("/ticket/edit/{id}", name="ticket_edit")
+     * @Route("/ticket/edit/{id}", name="ticket_edit", methods={"GET","PUT"}, requirements={"id"="\d+"})
      */
     public function edit_ticket(Ticket $ticket, Request $request)
     {
