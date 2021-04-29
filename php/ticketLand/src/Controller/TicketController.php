@@ -90,6 +90,10 @@ class TicketController extends AbstractController
      */
     public function create_ticket(Request $request)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('ticket_all');
+        }
+
         $ticket = new Ticket;
 
         $form = $this->createForm(TicketType::class, $ticket);
@@ -119,6 +123,10 @@ class TicketController extends AbstractController
      */
     public function edit_ticket(Ticket $ticket, Request $request)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('ticket_all');
+        }
+
         $form = $this->createForm(TicketType::class, $ticket, [ 'method' => 'PUT']);
         
         $form->handleRequest($request);
@@ -186,6 +194,10 @@ class TicketController extends AbstractController
      */
     public function delete_ticket(Ticket $ticket, Request $request)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('ticket_all');
+        }
+        
         if($this->isCsrfTokenValid('delete', $request->get('_token'))){
 
 
